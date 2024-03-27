@@ -6,15 +6,15 @@
 using namespace Atlas::Graphics::Buffers;
 
 IndexBuffer::IndexBuffer() {
+    this->m_Size = NULL;
 
     glGenBuffers(1, &m_ID);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ID);
 }
 
 IndexBuffer::IndexBuffer(const void* data, unsigned int size) {
     this->m_Size = size;
     glGenBuffers(1, &m_ID);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ID);
+    ErrCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ID));
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
 
 }
