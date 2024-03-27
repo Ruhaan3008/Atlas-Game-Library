@@ -1,5 +1,5 @@
 #pragma once
-#include "OpenGL_Errors/OpenGL_Errors.h"
+#include "Errors/Atlas_Errors.h"
 
 namespace Atlas {
 	namespace CORE {
@@ -8,9 +8,13 @@ namespace Atlas {
 			//Create new window
 			void Start();
 
-		public:
 			//Instance
 			GLFWwindow* window;
+
+		public:
+
+			//Returns the instance of the window
+			GLFWwindow* GetInstance() { return window; };
 
 			//Updates Window
 			void Update();

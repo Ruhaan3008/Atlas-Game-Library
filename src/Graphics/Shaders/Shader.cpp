@@ -12,7 +12,6 @@ unsigned int Shader::CreateComponentShader(GLenum type,string ShaderSource) {
 	glShaderSource(shader, 1, &src, nullptr);
 	glCompileShader(shader);
 
-
 	//handle errors in the source code
 
 	int result;
@@ -88,7 +87,16 @@ Shader::Shader(string VertexShaderPath, string FragmentShaderPath) {
 }
 
 Shader::Shader() {
-	string VertexShaderPath = "";
+	string VertexShaderPath = 
+		"#version 450 core \n"
+		"precision highp float; \n"
+
+		"out vec4 color; \n"
+		"uniform vec4 InputColor; \n"
+
+		"void main() { \n"
+		"	color = InputColor; \n"
+		"};" ;
 	string FragmentShaderPath =
 		"#version 450 core\n"
 		"precision highp float;\n"

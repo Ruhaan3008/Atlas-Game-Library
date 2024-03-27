@@ -6,6 +6,15 @@
 using namespace Atlas::Graphics;
 
 Mesh::Mesh() {
+
+	this->vertices = NULL;
+	this->vertexCount = 0;
+
+	this->indices = NULL;
+	this->indexCount = 0;
+
+	this->vertexSize = sizeof(float) * this->vertexCount;
+	this->indexSize = sizeof(float) * this->indexCount;
 }
 
 Mesh::Mesh(void* Vertices, unsigned int VertexCount, void* Indices, unsigned int IndexCount) {

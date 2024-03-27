@@ -4,12 +4,12 @@
 
 #include "../../Atlas.h"
 
-void Atlas::CORE::OpenGL_Errors::ClearError() {
+void Atlas::CORE::Errors::ClearError() {
 	GLenum error = glGetError();
 	while (glGetError() != GL_NO_ERROR);
 }
 
-void Atlas::CORE::OpenGL_Errors::CheckError() {
+void Atlas::CORE::Errors::CheckError() {
 
 	GLenum error = glGetError();
 
@@ -23,7 +23,7 @@ void Atlas::CORE::OpenGL_Errors::CheckError() {
 	}
 }
 
-bool Atlas::CORE::OpenGL_Errors::LogError(const char* function, const char* file, int line) {
+bool Atlas::CORE::Errors::LogError(const char* function, const char* file, int line) {
 
 	GLenum error = glGetError();
 

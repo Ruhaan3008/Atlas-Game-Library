@@ -21,9 +21,6 @@
     <ClCompile Include="src\CORE\OpenGL_Errors\OpenGL_Errors.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\CORE\RenderPipelineErrors\RenderPipelineErrors.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\CORE\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -49,9 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\CORE\OpenGL_Errors\OpenGL_Errors.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\CORE\RenderPipelineErrors\RenderPipelineErrors.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\CORE\CORE.h">

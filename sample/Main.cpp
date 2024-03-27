@@ -54,14 +54,14 @@ int main() {
     //Main Game Loop
 
     /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(application.window))
+    while (!glfwWindowShouldClose(application.GetInstance()))
     {
         application.Update();
     }
 
     //Terminate
 
-    OpenGL_Errors::CheckError();
+    Errors::CheckError();
 
     application.Terminate();
 
