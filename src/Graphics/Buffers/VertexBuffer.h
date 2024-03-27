@@ -4,34 +4,11 @@ namespace Atlas {
 	namespace Graphics {
 		namespace Buffers {
 
-
-			struct VertexBufferLayout {
-			public:
-				GLenum type;
-				unsigned int count;
-				void* pointer;
-				bool normalised;
-				unsigned int stride;
-
-				bool IsEmpty;
-
-				VertexBufferLayout();
-				VertexBufferLayout(GLenum Type, unsigned int Count,
-					void* Pointer, bool Normalized, unsigned int Stride);
-
-			};
-
 			class VertexBuffer {
 			private:
-				unsigned int id;
+				unsigned int m_ID;
 
-				unsigned int size;
-
-				VertexBufferLayout positionAttributes;
-				VertexBufferLayout textureAttributes;
-
-				void SetAttributes(VertexBufferLayout layout);
-
+				unsigned int m_Size;
 
 			public:
 

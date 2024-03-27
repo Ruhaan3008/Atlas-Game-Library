@@ -9,7 +9,10 @@ namespace Atlas {
 	namespace Graphics {
 		class Shader {
 		private:
-			unsigned int shader_id;
+			unsigned int m_ShaderID;
+
+			unsigned int m_VertexShaderID;
+			unsigned int m_FragmentShaderID;
 
 		public:
 
@@ -18,9 +21,6 @@ namespace Atlas {
 
 			string vertexShaderSource;
 			string fragmentShaderSource;
-
-			unsigned int vertexShader;
-			unsigned int fragmentShader;
 
 
 			//Create and compile the master shader. NOTE: Works only if the component shader have been compiled.
@@ -36,7 +36,7 @@ namespace Atlas {
 			int GetUniform(char uniformName);
 
 			//Returns the shader ID
-			unsigned int GetShaderID() const { return shader_id; };
+			unsigned int GetShaderID() const { return m_ShaderID; };
 
 			//Makes a default white shader.
 			Shader();

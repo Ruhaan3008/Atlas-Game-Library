@@ -8,7 +8,7 @@ using namespace Atlas::CORE;
 
 void Window::Start() {
 
-    GLFWwindow*& win = this->window;
+    GLFWwindow*& win = this->m_window;
 
     /* Initialize the library */
     glfwInit();
@@ -45,7 +45,7 @@ void Window::SetFullScreen() {
     const GLFWvidmode* mode = glfwGetVideoMode(monitor);
 
     //sets window to full screen
-    glfwSetWindowMonitor(this->window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
+    glfwSetWindowMonitor(this->m_window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
 }
 
 void Window::Update() {
@@ -56,14 +56,14 @@ void Window::Update() {
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 
     /* Swap front and back buffers */
-    glfwSwapBuffers(this->window);
+    glfwSwapBuffers(this->m_window);
 
     /* Poll for and process events */
     glfwPollEvents();
 }
 
 void Window::Terminate() {
-    glfwDestroyWindow(this->window);
+    glfwDestroyWindow(this->m_window);
 }
 
 void Atlas::CORE::TerminateGLFW() {

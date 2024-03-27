@@ -3,8 +3,6 @@
 namespace Atlas {
 	namespace Graphics {
 		struct Mesh {
-		private:
-		public:
 			void* vertices;
 			unsigned int vertexCount;
 

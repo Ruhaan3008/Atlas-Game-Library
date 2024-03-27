@@ -9,12 +9,12 @@ namespace Atlas {
 			void Start();
 
 			//Instance
-			GLFWwindow* window;
+			GLFWwindow* m_window;
 
 		public:
 
 			//Returns the instance of the window
-			GLFWwindow* GetInstance() { return window; };
+			GLFWwindow* GetInstance() { return m_window; };
 
 			//Updates Window
 			void Update();

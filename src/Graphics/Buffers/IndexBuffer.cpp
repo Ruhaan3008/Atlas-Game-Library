@@ -7,25 +7,25 @@ using namespace Atlas::Graphics::Buffers;
 
 IndexBuffer::IndexBuffer() {
 
-    glGenBuffers(1, &id);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id);
+    glGenBuffers(1, &m_ID);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ID);
 }
 
 IndexBuffer::IndexBuffer(const void* data, unsigned int size) {
-    this->size = size;
-    glGenBuffers(1, &id);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id);
+    this->m_Size = size;
+    glGenBuffers(1, &m_ID);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ID);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
 
 }
 
 IndexBuffer::~IndexBuffer() {
-    glDeleteBuffers(1, &id);
+    glDeleteBuffers(1, &m_ID);
 
 }
 
 void IndexBuffer::Bind() {
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ID);
 
 }
 

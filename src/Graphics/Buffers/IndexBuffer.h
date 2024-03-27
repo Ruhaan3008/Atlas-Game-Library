@@ -8,8 +8,8 @@ namespace Atlas {
 
 			class IndexBuffer {
 			private:
-				unsigned int id;
-				unsigned int size;
+				unsigned int m_ID;
+				unsigned int m_Size;
 
 			public:
 				void Bind();

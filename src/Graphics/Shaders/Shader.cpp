@@ -55,21 +55,21 @@ string Shader::ReadShaderFile(string path) {
 
 void Shader::CreateShader() {
 	//vertex and fragment shader
-	this->shader_id = glCreateProgram();
+	this->m_ShaderID = glCreateProgram();
 	//unsigned int vertexShader = Shader::CreateComponentShader(GL_VERTEX_SHADER, this->vertexShaderSource);
 	//unsigned int fragmentShader = Shader::CreateComponentShader(GL_FRAGMENT_SHADER, this->fragmentShaderSource);
 
 	//attaches component shader to master shaders
-	glAttachShader(this->shader_id, this->vertexShader);
-	glAttachShader(this->shader_id, this->fragmentShader);
+	glAttachShader(this->m_ShaderID, this->m_VertexShaderID);
+	glAttachShader(this->m_ShaderID, this->m_FragmentShaderID);
 
 	//compile the master shader
-	glLinkProgram(this->shader_id);
+	glLinkProgram(this->m_ShaderID);
 
 }
 
 int Shader::GetUniform(char uniformName) {
-	return glGetUniformLocation(this->shader_id, &uniformName);
+	return glGetUniformLocation(this->m_ShaderID, &uniformName);
 }
 
 Shader::Shader(string VertexShaderPath, string FragmentShaderPath) {
@@ -79,8 +79,8 @@ Shader::Shader(string VertexShaderPath, string FragmentShaderPath) {
 	this->vertexShaderSource = ReadShaderFile(this->vertexShaderPath);
 	this->fragmentShaderSource = ReadShaderFile(this->fragmentShaderPath);
 
-	this->vertexShader = CreateComponentShader(GL_VERTEX_SHADER, this->vertexShaderSource);
-	this->fragmentShader = CreateComponentShader(GL_FRAGMENT_SHADER, this->fragmentShaderSource);
+	this->m_VertexShaderID = CreateComponentShader(GL_VERTEX_SHADER, this->vertexShaderSource);
+	this->m_FragmentShaderID = CreateComponentShader(GL_FRAGMENT_SHADER, this->fragmentShaderSource);
 
 	CreateShader();
 
@@ -110,15 +110,15 @@ Shader::Shader() {
 	this->vertexShaderSource = ReadShaderFile(this->vertexShaderPath);
 	this->fragmentShaderSource = ReadShaderFile(this->fragmentShaderPath);
 
-	this->vertexShader = CreateComponentShader(GL_VERTEX_SHADER, this->vertexShaderSource);
-	this->fragmentShader = CreateComponentShader(GL_FRAGMENT_SHADER, this->fragmentShaderSource);
+	this->m_VertexShaderID = CreateComponentShader(GL_VERTEX_SHADER, this->vertexShaderSource);
+	this->m_FragmentShaderID = CreateComponentShader(GL_FRAGMENT_SHADER, this->fragmentShaderSource);
 
 	CreateShader();
 
 }
 
 Shader::~Shader() {
-	glDeleteShader(this->vertexShader);
-	glDeleteShader(this->fragmentShader);
-	glDeleteShader(this->shader_id);
+	glDeleteShader(this->m_VertexShaderID);
+	glDeleteShader(this->m_FragmentShaderID);
+	glDeleteShader(this->m_ShaderID);
 }
