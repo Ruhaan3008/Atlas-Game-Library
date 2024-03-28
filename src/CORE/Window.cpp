@@ -49,14 +49,19 @@ void Window::SetFullScreen() {
 }
 
 void Window::Update() {
-
     /* Render here */
     glClear(GL_COLOR_BUFFER_BIT);
 
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+    unsigned int indices[] = {
+        0,1,2,
+        2,3,0
+    };
+
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, indices);
 
     /* Swap front and back buffers */
     glfwSwapBuffers(this->m_window);
+
 
     /* Poll for and process events */
     glfwPollEvents();
