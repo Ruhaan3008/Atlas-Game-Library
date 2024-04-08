@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -28,6 +28,8 @@
     <ClCompile Include="src\Graphics\RenderObj.cpp" />
     <ClCompile Include="src\Graphics\Shaders\Shader.cpp" />
     <ClCompile Include="src\Graphics\Structs\Mesh.cpp" />
+    <ClCompile Include="src\Math\Vectors\Vector2.cpp" />
+    <ClCompile Include="src\Math\Vectors\Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\Shaders\BasicFragmentShader.glsl" />
@@ -47,6 +49,8 @@
     <ClInclude Include="src\Graphics\Shaders\Shader.h" />
     <ClInclude Include="src\Graphics\Structs\Mesh.h" />
     <ClInclude Include="src\Graphics\Structs\Structs.h" />
+    <ClInclude Include="src\Math\Math.h" />
+    <ClInclude Include="src\Math\Vectors\Vectors.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
