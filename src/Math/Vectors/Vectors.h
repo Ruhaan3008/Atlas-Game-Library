@@ -28,6 +28,18 @@ namespace Atlas {
 			Vector3();
 			Vector3(float t_X, float t_Y, float t_Z);
 
+			//Function peformed with two vectors;
+			static Vector3 Add(const Vector3* a, const Vector3* b);
+			static Vector3 Multiply(float a, const Vector3* b);
+			static float DotProduct(const Vector3* a, const Vector3* b);
+
+			//Operation performed on one instance of vector
+			void Negate();
+			void Normalize();
+
+			static float DistanceTo(const Vector3* From, const Vector3* To);
+			static float Magnitude(const Vector3* t_Vector);
+
 		};
 
 		struct Vector4 {
