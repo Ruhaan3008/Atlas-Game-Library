@@ -4,46 +4,58 @@ namespace Atlas {
 	namespace Math {
 
 		struct Vector2 {
-			float x, y;
+			double x, y;
 
 			Vector2();
-			Vector2(float t_X, float t_Y);
+			Vector2(double t_X, double t_Y);
 
-			//Function peformed with two vectors;
-			static Vector2 Add(const Vector2* a,const Vector2* b);
-			static Vector2 Multiply(float a, const Vector2* b);
-			static float DotProduct(const Vector2* a,const Vector2* b);
-
-			//Operation performed on one instance of vector
 			void Negate();
 			void Normalize();
 
-			static float DistanceTo(const Vector2* From, const Vector2* To);
-			static float Magnitude(const Vector2* t_Vector);
+			static double DistanceTo(const Vector2& From, const Vector2& To);
+			static double Magnitude(const Vector2& t_Vector);
+			static double DotProduct(const Vector2& a, const Vector2& b);
+
+			//operator overloading
+			Vector2 operator+(const Vector2& Vector);
+			Vector2 operator-(const Vector2& Vector);
+			Vector2 operator*(const double& Number);
+			Vector2 operator/(const double& Number);
+
+			Vector2 operator+=(const Vector2& Vector);
+			Vector2 operator-=(const Vector2& Vector);
+			Vector2 operator*=(const double& Number);
+			Vector2 operator/=(const double& Number);
 		};
 
 		struct Vector3 {
-			float x, y, z;
+			double x, y, z;
 
 			Vector3();
-			Vector3(float t_X, float t_Y, float t_Z);
+			Vector3(double t_X, double t_Y, double t_Z);
 
-			//Function peformed with two vectors;
-			static Vector3 Add(const Vector3* a, const Vector3* b);
-			static Vector3 Multiply(float a, const Vector3* b);
-			static float DotProduct(const Vector3* a, const Vector3* b);
-
-			//Operation performed on one instance of vector
 			void Negate();
 			void Normalize();
 
-			static float DistanceTo(const Vector3* From, const Vector3* To);
-			static float Magnitude(const Vector3* t_Vector);
+			static double DistanceTo(const Vector3& From, const Vector3& To);
+			static double Magnitude(const Vector3& t_Vector);
+			static double DotProduct(const Vector3& a, const Vector3& b);
+
+			//Operator overloading
+			Vector3 operator+(const Vector3& Vector);
+			Vector3 operator-(const Vector3& Vector);
+			Vector3 operator*(const double& Number);
+			Vector3 operator/(const double& Number);
+
+			Vector3 operator+=(const Vector3& Vector);
+			Vector3 operator-=(const Vector3& Vector);
+			Vector3 operator*=(const double& Number);
+			Vector3 operator/=(const double& Number);
 
 		};
 
 		struct Vector4 {
-			float x, y, z, w;
+			double x, y, z, w;
 		};
 	}
 }

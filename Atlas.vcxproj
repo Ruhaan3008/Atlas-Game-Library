@@ -28,6 +28,7 @@
     <ClCompile Include="src\Graphics\RenderObj.cpp" />
     <ClCompile Include="src\Graphics\Shaders\Shader.cpp" />
     <ClCompile Include="src\Graphics\Structs\Mesh.cpp" />
+    <ClCompile Include="src\Math\util\math_util.cpp" />
     <ClCompile Include="src\Math\Vectors\Vector2.cpp" />
     <ClCompile Include="src\Math\Vectors\Vector3.cpp" />
   </ItemGroup>
@@ -50,6 +51,7 @@
     <ClInclude Include="src\Graphics\Structs\Mesh.h" />
     <ClInclude Include="src\Graphics\Structs\Structs.h" />
     <ClInclude Include="src\Math\Math.h" />
+    <ClInclude Include="src\Math\util\math_util.h" />
     <ClInclude Include="src\Math\Vectors\Vectors.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

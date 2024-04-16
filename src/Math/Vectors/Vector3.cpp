@@ -9,61 +9,92 @@ Vector3::Vector3() {
 
 }
 
-Vector3::Vector3(float t_X, float t_Y, float t_Z) {
+Vector3::Vector3(double t_X, double t_Y, double t_Z) {
 	x = t_X;
 	y = t_Y;
 	z = t_Z;
 
 }
 
-float Vector3::DistanceTo(const Vector3* From, const Vector3* To) {
-	float x = (*From).x - (*To).x;
-	float y = (*From).y - (*To).y;
-	float z = (*From).z - (*To).z;
+double Vector3::DistanceTo(const Vector3& From, const Vector3& To) {
+	double x = From.x - To.x;
+	double y = From.y - To.y;
+	double z = From.z - To.z;
 
 	x *= x;
 	y *= y;
 	z *= z;
 
-	float Distance = sqrt(x + y + z);
+	double Distance = sqrt(x + y + z);
 
 	return Distance;
 
 }
 
-float Vector3::Magnitude(const Vector3* t_Vector) {
-	float x = (*t_Vector).x;
-	float y = (*t_Vector).y;
-	float z = (*t_Vector).z;
+double Vector3::Magnitude(const Vector3& t_Vector) {
+	double x = t_Vector.x;
+	double y = t_Vector.y;
+	double z = t_Vector.z;
 
 	x *= x;
 	y *= y;
 	z *= z;
 
-	float Magnitude = sqrt(x + y + z);
+	double Magnitude = sqrt(x + y + z);
 
 	return Magnitude;
 }
 
-Vector3 Vector3::Add(const Vector3* a, const Vector3* b) {
-	float x = (*a).x + (*b).x;
-	float y = (*a).y + (*b).y;
-	float z = (*a).z + (*b).z;
+Vector3 Vector3::operator+(const Vector3& Vector) {
 
-	return Vector3(x, y, z);
+	return Vector3(this->x + Vector.x, this->y + Vector.y, this->z + Vector.z);
 
 }
 
-Vector3 Vector3::Multiply(float a, const Vector3* b) {
-	float x = a * (*b).x;
-	float y = a * (*b).y;
-	float z = a * (*b).z;
+Vector3 Vector3::operator-(const Vector3& Vector) {
 
-	return Vector3(x, y, z);
+	return Vector3(this->x - Vector.x, this->y - Vector.y, this->z - Vector.z);
+
 }
 
-float Vector3::DotProduct(const Vector3* a, const Vector3* b) {
-	return ((*a).x * (*b).x) + ((*a).y * (*b).y) + ((*a).z * (*b).z);
+Vector3 Vector3::operator*(const double& Number) {
+
+	return Vector3(this->x * Number, this->y * Number, this->z * Number);
+
+}
+
+Vector3 Vector3::operator/(const double& Number) {
+
+	return Vector3(this->x / Number, this->y / Number, this->z / Number);
+
+}
+
+Vector3 Vector3::operator+=(const Vector3& Vector) {
+
+	return Vector3(this->x + Vector.x, this->y + Vector.y, this->z + Vector.z);
+
+}
+
+Vector3 Vector3::operator-=(const Vector3& Vector) {
+
+	return Vector3(this->x - Vector.x, this->y - Vector.y, this->z - Vector.z);
+
+}
+
+Vector3 Vector3::operator*=(const double& Number) {
+
+	return Vector3(this->x * Number, this->y * Number, this->z * Number);
+
+}
+
+Vector3 Vector3::operator/=(const double& Number) {
+
+	return Vector3(this->x / Number, this->y / Number, this->z / Number);
+
+}
+
+double Vector3::DotProduct(const Vector3& a, const Vector3& b) {
+	return (a.x * b.x) + (a.y * b.y) + (a.z * b.z);
 }
 
 void Vector3::Negate() {
@@ -73,8 +104,8 @@ void Vector3::Negate() {
 }
 
 void Vector3::Normalize() {
-	float mangnitude = Vector3::Magnitude(this);
+	double mangnitude = Vector3::Magnitude(*this);
 	mangnitude = 1 / mangnitude;
-	*this = Vector3::Multiply(mangnitude, this);
+	*this *= mangnitude;
 
 }

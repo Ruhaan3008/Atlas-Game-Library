@@ -7,53 +7,38 @@ Vector2::Vector2() {
 	y = 0;
 }
 
-Vector2::Vector2(float t_X, float t_Y) {
+Vector2::Vector2(double t_X, double t_Y) {
 	x = t_X;
 	y = t_Y;
 }
 
-float Vector2::DistanceTo(const Vector2* From, const Vector2* To) {
-	float x = (*From).x - (*To).x;
-	float y = (*From).y - (*To).y;
+double Vector2::DistanceTo(const Vector2& From, const Vector2& To) {
+	double x = From.x - To.x;
+	double y = From.y - To.y;
 
 	x *= x;
 	y *= y;
 
-	float Distance = sqrt(x + y);
+	double Distance = sqrt(x + y);
 
 	return Distance;
 
 }
 
-float Vector2::Magnitude(const Vector2* t_Vector) {
-	float x = (*t_Vector).x;
-	float y = (*t_Vector).y;
+double Vector2::Magnitude(const Vector2& t_Vector) {
+	double x = t_Vector.x;
+	double y = t_Vector.y;
 
 	x *= x;
 	y *= y;
 
-	float Magnitude = sqrt(x + y);
+	double Magnitude = sqrt(x + y);
 
 	return Magnitude;
 }
 
-Vector2 Vector2::Add(const Vector2* a, const Vector2* b) {
-	float x = (*a).x + (*b).x;
-	float y = (*a).y + (*b).y;
-
-	return Vector2(x, y);
-
-}
-
-Vector2 Vector2::Multiply(float a, const Vector2* b) {
-	float x = a * (*b).x;
-	float y = a * (*b).y;
-
-	return Vector2(x, y);
-}
-
-float Vector2::DotProduct(const Vector2* a, const Vector2* b) {
-	return ((*a).x * (*b).x) + ((*a).y * (*b).y);
+double Vector2::DotProduct(const Vector2& a, const Vector2& b) {
+	return (a.x * b.x) + (a.y * b.y);
 }
 
 void Vector2::Negate() {
@@ -62,8 +47,44 @@ void Vector2::Negate() {
 }
 
 void Vector2::Normalize() {
-	float mangnitude = Vector2::Magnitude(this);
+	double mangnitude = Vector2::Magnitude(*this);
 	mangnitude = 1 / mangnitude;
-	*this = Vector2::Multiply(mangnitude, this);
+	*this = (*this) * mangnitude;
 
+}
+
+Vector2 Vector2::operator+(const Vector2& a) {
+	return Vector2(a.x + this->x,a .y + this->y);
+
+}
+
+Vector2 Vector2::operator-(const Vector2& a) {
+	return Vector2(this->x - a.x,this->y - a.y);
+
+}
+
+Vector2 Vector2::operator*(const double& Number) {
+	return Vector2(this->x * Number,this->y * Number);
+}
+
+Vector2 Vector2::operator/(const double& Number) {
+	return Vector2(this->x / Number, this->y / Number);
+}
+
+Vector2 Vector2::operator+=(const Vector2& a) {
+	return Vector2(a.x + this->x,a .y + this->y);
+
+}
+
+Vector2 Vector2::operator-=(const Vector2& a) {
+	return Vector2(this->x - a.x,this->y - a.y);
+
+}
+
+Vector2 Vector2::operator*=(const double& Number) {
+	return Vector2(this->x * Number,this->y * Number);
+}
+
+Vector2 Vector2::operator/=(const double& Number) {
+	return Vector2(this->x / Number, this->y / Number);
 }
