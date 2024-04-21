@@ -1,4 +1,5 @@
 #pragma once
 
 #include "Window.h"
-#include "Errors/Atlas_Errors.h"
+#include "Errors/Log_Error.h"
+#include "Errors/Error_Struct.h"

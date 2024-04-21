@@ -36,7 +36,7 @@
     <ClCompile Include="src\Graphics\Structs\Mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\CORE\Errors\OpenGL_Errors.cpp">
+    <ClCompile Include="src\CORE\Errors\Errors.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Graphics\RenderObj.cpp">
@@ -46,6 +46,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Math\Vectors\Vector3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Math\util\math_util.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -87,7 +90,7 @@
     <ClInclude Include="src\Atlas.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\CORE\Errors\Atlas_Errors.h">
+    <ClInclude Include="src\CORE\Errors\Log_Error.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Graphics\RenderObj.h">
@@ -97,6 +100,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Math\Vectors\Vectors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Math\util\math_util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CORE\Errors\Error_Struct.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
