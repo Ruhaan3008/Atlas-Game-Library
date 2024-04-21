@@ -13,9 +13,6 @@ namespace Atlas {
 			int height;
 			int width;
 
-			//Returns the instance of the window
-			GLFWwindow* GetInstance() { return m_Window; };
-
 			//Updates Window
 			void Update();
 			//Terminates this Window
