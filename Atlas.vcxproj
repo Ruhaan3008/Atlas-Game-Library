@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sample\Main.cpp" />
+    <ClCompile Include="src\CORE\CORE.cpp" />
     <ClCompile Include="src\CORE\Errors\OpenGL_Errors.cpp" />
     <ClCompile Include="src\CORE\Window.cpp" />
     <ClCompile Include="src\Graphics\Buffers\IndexBuffer.cpp" />

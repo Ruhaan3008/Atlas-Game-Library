@@ -8,9 +8,11 @@ using namespace Atlas::Graphics::Buffers;
 
 
 int main() {
-    //Initiation
 
-    Window application = Window();
+    AtlasInnit();
+
+    //Initiation
+    Window application = Window(500,500, "Sample Square");
 
     //application.SetFullScreen();
 
