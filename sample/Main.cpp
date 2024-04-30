@@ -1,10 +1,13 @@
 #include <iostream>
+#include "../src/Errors.h"
 #include "../src/Atlas.h"
 #include <GLFW/glfw3.h>
 
 using namespace Atlas::CORE;
+using namespace Atlas::CORE::Errors;
 using namespace Atlas::Graphics;
 using namespace Atlas::Graphics::Buffers;
+
 
 
 int main() {
@@ -52,7 +55,7 @@ int main() {
 
     //Terminate
 
-    Errors::CheckError();
+    //Errors::CheckError();
 
     application.Terminate();
 

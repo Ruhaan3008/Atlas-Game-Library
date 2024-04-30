@@ -1,4 +1,4 @@
-#pragma once
+#pragma
 #include <iostream>
 
 using std::string;
@@ -6,6 +6,7 @@ using std::string;
 namespace Atlas {
 	namespace CORE {
 		namespace Errors {
+
 
 			enum ErrorType {
 				None = -2,
@@ -19,7 +20,7 @@ namespace Atlas {
 				FileWrite = 6
 			};
 			enum ErrorSeverity {
-				Debug,
+				Debug, 
 				Info,
 				Warning, //Could cause unexpected outcomes
 				Moderate, //Will cause unexpected outcomes
@@ -29,8 +30,8 @@ namespace Atlas {
 			};
 
 			struct Error {
-				ErrorType e;
-				ErrorSeverity s;
+				ErrorType Type;
+				ErrorSeverity Severity;
 
 				unsigned int ErrorCode;
 
@@ -41,14 +42,14 @@ namespace Atlas {
 
 				int line;
 
+				Error();
+
 				Error(ErrorType t_E, ErrorSeverity t_S,
 					string t_Description,
 					string t_File, string t_Function, int t_Line);
 
 				string GetErrorMessage();
 			};
-
-
 		}
 	}
 }

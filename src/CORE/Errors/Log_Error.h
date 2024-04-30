@@ -17,7 +17,7 @@ namespace Atlas {
 			void CheckOpenGlError();
 
 			//Return true if there is no error, returns false if there is an error.
-			bool LogError(const char* function, const char* file, int line);
+			bool LogError();
 		}
 	}
 }
