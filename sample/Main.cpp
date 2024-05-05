@@ -13,9 +13,11 @@ using namespace Atlas::Graphics::Buffers;
 
 
 int main() {
-    //Initiation
 
-    Window application = Window();
+    AtlasInnit();
+
+    //Initiation
+    Window application = Window(500,500, "Sample Square");
 
     //application.SetFullScreen();
 
@@ -45,7 +47,7 @@ int main() {
 
 
     int loc = glGetUniformLocation(program.GetShaderID(), "InputColor");
-    glUniform4f(loc, 0.2, 0.5, 0.1, 1);
+    glUniform4f(loc, 0.2f, 0.5f, 0.1f, 1);
 
     //Main Game Loop
 

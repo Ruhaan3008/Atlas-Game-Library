@@ -6,37 +6,6 @@
 
 using namespace Atlas::CORE;
 
-void Window::Start() {
-
-    GLFWwindow*& win = this->m_window;
-
-    /* Initialize the library */
-    glfwInit();
-
-    //GLFW verion
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
-
-    //Setting glfw mode to core
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-    /* Create a windowed mode window and its OpenGL context */
-    win = glfwCreateWindow(640, 480, "Atlas", NULL, NULL);
-    if (!win)
-    {
-        glfwTerminate();
-    }
-
-    /* Make the window's context current */
-    glfwMakeContextCurrent(win);
-
-    //Initiate glew aka Modern OpenGL
-    glewInit();
-
-    std::cout << glGetString(GL_VERSION) << '\n';
-
-}
-
 void Window::SetFullScreen() {
 
     GLFWmonitor* monitor = glfwGetPrimaryMonitor();
@@ -45,10 +14,22 @@ void Window::SetFullScreen() {
     const GLFWvidmode* mode = glfwGetVideoMode(monitor);
 
     //sets window to full screen
-    glfwSetWindowMonitor(this->m_window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
+    glfwSetWindowMonitor(this->m_Window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
+}
+
+void Window::Resizable(bool resizable){
+    if (resizable) {
+        glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+        return;
+    }
+
+    glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 }
 
 void Window::Update() {
+    //Update screen size
+    glfwGetWindowSize(m_Window, &(this->height), &(this->width));
+
     /* Render here */
     glClear(GL_COLOR_BUFFER_BIT);
 
@@ -60,7 +41,7 @@ void Window::Update() {
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, indices);
 
     /* Swap front and back buffers */
-    glfwSwapBuffers(this->m_window);
+    glfwSwapBuffers(this->m_Window);
 
 
     /* Poll for and process events */
@@ -68,15 +49,52 @@ void Window::Update() {
 }
 
 void Window::Terminate() {
-    glfwDestroyWindow(this->m_window);
-}
-
-void Atlas::CORE::TerminateGLFW() {
-    glfwTerminate();
+    glfwDestroyWindow(this->m_Window);
 }
 
 Window::Window() {
-    Start();
+
+    glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+
+    this->height = 480;
+    this->width = 640;
+
+    /* Create a windowed mode window and its OpenGL context */
+    m_Window = glfwCreateWindow(640, 480, "Atlas", NULL, NULL);
+    if (!m_Window)
+    {
+        glfwTerminate();
+    }
+
+    /* Make the window's context current */
+    glfwMakeContextCurrent(m_Window);
+
+    //Initiate glew aka Modern OpenGL
+    glewInit();
+
+    std::cout << glGetString(GL_VERSION) << '\n';
+}
+Window::Window(int height, int width, const char* windowName){
+    glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+
+    this->height = height;
+    this->width = width;
+
+    /* Create a windowed mode window and its OpenGL context */
+    m_Window = glfwCreateWindow(width, height, windowName, NULL, NULL);
+
+    if (!m_Window)
+    {
+        glfwTerminate();
+    }
+
+    /* Make the window's context current */
+    glfwMakeContextCurrent(m_Window);
+
+    //Initiate glew aka Modern OpenGL
+    glewInit();
+
+    std::cout << glGetString(GL_VERSION) << '\n';
 }
 Window::~Window() {
     Window::Terminate();

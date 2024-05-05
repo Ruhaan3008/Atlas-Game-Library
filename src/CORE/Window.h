@@ -4,16 +4,13 @@ namespace Atlas {
 	namespace CORE {
 		class Window {
 		private:
-			//Create new window
-			void Start();
-
 			//Instance
-			GLFWwindow* m_window;
+			GLFWwindow* m_Window;
 
 		public:
 
-			//Returns the instance of the window
-			GLFWwindow* GetInstance() { return m_window; };
+			int height;
+			int width;
 
 			//Updates Window
 			void Update();
@@ -22,15 +19,15 @@ namespace Atlas {
 
 			//Sets the window to full screen mode.
 			void SetFullScreen();
+
+			void Resizable(bool resizable);
 			
 			//Constructor. Creates a new window.
 			Window();
+			Window(int height, int width, const char* windowName);
 			//Destructor. Closes the window.
 			~Window();
 		
 		};
-
-		//Terminates GLFW
-		void TerminateGLFW();
 	}
 }
