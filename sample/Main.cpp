@@ -1,5 +1,7 @@
 #include <iostream>
-#include "../src/Errors.h"
+
+#define ENABLE_ERROR_LOG
+
 #include "../src/Atlas.h"
 #include <GLFW/glfw3.h>
 

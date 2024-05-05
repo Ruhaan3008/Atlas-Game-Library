@@ -39,10 +39,8 @@
   <ItemGroup>
     <ClInclude Include="src\Atlas.h" />
     <ClInclude Include="src\CORE\CORE.h" />
-    <ClInclude Include="src\CORE\Errors\Log_Error.h" />
     <ClInclude Include="src\CORE\Errors\Error_Struct.h" />
     <ClInclude Include="src\CORE\Window.h" />
-    <ClInclude Include="src\Errors.h" />
     <ClInclude Include="src\Graphics\Buffers\Buffers.h" />
     <ClInclude Include="src\Graphics\Buffers\IndexBuffer.h" />
     <ClInclude Include="src\Graphics\Buffers\VertexArray.h" />

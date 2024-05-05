@@ -1,10 +1,9 @@
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
 #include <iostream>
+#include <fstream>
+
 #include <string>
 
 #include "Error_struct.h"
-#include "Log_Error.h"
 
 using namespace Atlas::CORE::Errors;
 
@@ -107,8 +106,54 @@ string Error::GetErrorMessage() {
 	string ErrorSeverity = ErrorSeverityToString(Severity);
 	string ReturnString = "[" + ErrorType + "]";
 	ReturnString += " " + ErrorSeverity + '\n';
-	ReturnString += std::to_string(ErrorCode) + ": " + Description + '\n';
-	ReturnString += function + " Function" + '\n';
-	ReturnString += file + " " + std::to_string(line) +'\n';
+	ReturnString += Description + '\n';
+	ReturnString += "\t" + function + " Function" + '\n';
+	ReturnString += '\t' + file + ", " + std::to_string(line) + '\n';
 	return ReturnString;
+}
+
+void Atlas::CORE::Errors::Error::LogErrorToFile()
+{
+	std::fstream LogFile;
+
+	LogFile.open(LOG_PATH, std::ios::app);
+
+	if (LogFile.is_open())
+	{
+		LogFile << "Logged at ";
+		LogFile << __TIME__;
+		LogFile << '\n';
+		LogFile << this->GetErrorMessage();
+		LogFile << '\n';
+		LogFile << '\n';
+
+		LogFile.close();
+	}
+	else {
+		std::cout << "Failed to open error log." << '\n';
+		//TODO: Make exception handling for.
+	}
+}
+
+void Atlas::CORE::Errors::Error::LogErrorToFile(string path)
+{
+	std::fstream LogFile;
+
+	LogFile.open(path, std::ios::app);
+
+	if (LogFile.is_open())
+	{
+		LogFile << "Logged at ";
+		LogFile << __TIME__;
+		LogFile << '\n';
+		LogFile << this->GetErrorMessage();
+		LogFile << '\n';
+		LogFile << '\n';
+
+		LogFile.close();
+	}
+	else {
+		std::cout << "Failed to open error log." << '\n';
+		//TODO: Make exception handling for this.
+	}
 }

@@ -1,6 +1,12 @@
 #pragma
 #include <iostream>
 
+#ifndef LOG_PATH
+
+#define LOG_PATH "bin/log.txt"
+
+#endif
+
 using std::string;
 
 namespace Atlas {
@@ -42,13 +48,15 @@ namespace Atlas {
 
 				int line;
 
-				Error();
 
+				Error();
 				Error(ErrorType t_E, ErrorSeverity t_S,
 					string t_Description,
 					string t_File, string t_Function, int t_Line);
 
 				string GetErrorMessage();
+				void LogErrorToFile();
+				void LogErrorToFile(string path);
 			};
 		}
 	}
