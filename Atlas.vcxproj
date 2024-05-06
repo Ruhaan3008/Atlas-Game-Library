@@ -20,8 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sample\Main.cpp" />
-    <ClCompile Include="src\CORE\CORE.cpp" />
-    <ClCompile Include="src\CORE\Errors\OpenGL_Errors.cpp" />
+    <ClCompile Include="src\CORE\Errors\Error_Struct.cpp" />
     <ClCompile Include="src\CORE\Window.cpp" />
     <ClCompile Include="src\Graphics\Buffers\IndexBuffer.cpp" />
     <ClCompile Include="src\Graphics\Buffers\VertexArray.cpp" />
@@ -40,7 +39,7 @@
   <ItemGroup>
     <ClInclude Include="src\Atlas.h" />
     <ClInclude Include="src\CORE\CORE.h" />
-    <ClInclude Include="src\CORE\Errors\Atlas_Errors.h" />
+    <ClInclude Include="src\CORE\Errors\Error_Struct.h" />
     <ClInclude Include="src\CORE\Window.h" />
     <ClInclude Include="src\Graphics\Buffers\Buffers.h" />
     <ClInclude Include="src\Graphics\Buffers\IndexBuffer.h" />

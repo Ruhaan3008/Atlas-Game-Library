@@ -1,7 +1,13 @@
 #pragma once
 
 #include "Window.h"
-#include "Errors/Atlas_Errors.h"
+
+
+#ifdef ENABLE_ERROR_LOG
+
+#include "Errors/Error_Struct.h"
+
+#endif
 
 namespace Atlas {
 	namespace CORE {
