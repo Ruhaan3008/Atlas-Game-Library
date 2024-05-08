@@ -1,9 +1,12 @@
+#pragma once
+
 #include <iostream>
 #include <fstream>
 
 #include <string>
 
 #include "Error_struct.h"
+#include "Error_Definition.h"
 
 using namespace Atlas::CORE::Errors;
 
@@ -40,35 +43,35 @@ static string ErrorSeverityToString(ErrorSeverity s) {
 static string ErrorTypeToString(ErrorType e) {
 	switch (e) {
 	case Unknown:
-		return "Unknown Error";
+		return "Unknown";
 		break;
 
 	case ShaderCompilation:
-		return "Shader Compilation Error";
+		return "Shader Compilation";
 		break;
 
-	case CORE:
-		return "CORE Error";
+	case Core:
+		return "CORE";
 		break;
 
 	case Buffer:
-		return "Buffer Error";
+		return "Buffer";
 		break;
 
 	case Math:
-		return "Math Error";
+		return "Math";
 		break;
 
 	case OpenGL:
-		return "OpenGL Error";
+		return "OpenGL";
 		break;
 
 	case FileRead:
-		return "File Read Error";
+		return "File Read";
 		break;
 
 	case FileWrite:
-		return "File Write Error";
+		return "File Write";
 		break;
 	}
 
@@ -107,7 +110,7 @@ string Error::GetErrorMessage() {
 	string ReturnString = "[" + ErrorType + "]";
 	ReturnString += " " + ErrorSeverity + '\n';
 	ReturnString += Description + '\n';
-	ReturnString += "\t" + function + " Function" + '\n';
+	ReturnString += "\t" + function + "()" + '\n';
 	ReturnString += '\t' + file + ", " + std::to_string(line) + '\n';
 	return ReturnString;
 }
@@ -155,5 +158,28 @@ void Atlas::CORE::Errors::Error::LogErrorToFile(string path)
 	else {
 		std::cout << "Failed to open error log." << '\n';
 		//TODO: Make exception handling for this.
+	}
+}
+
+void Atlas::CORE::Errors::Error::LogDebugInfoToFile()
+{
+	std::fstream LogFile;
+
+	LogFile.open(DEBUG_PATH, std::ios::app);
+
+	if (LogFile.is_open())
+	{
+		LogFile << "Logged at ";
+		LogFile << __TIME__;
+		LogFile << '\n';
+		LogFile << this->GetErrorMessage();
+		LogFile << '\n';
+		LogFile << '\n';
+
+		LogFile.close();
+	}
+	else {
+		std::cout << "Failed to open error log." << '\n';
+		//TODO: Make exception handling for.
 	}
 }

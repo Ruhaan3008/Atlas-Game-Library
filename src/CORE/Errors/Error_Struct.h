@@ -1,11 +1,6 @@
-#pragma
+#pragma once
+
 #include <iostream>
-
-#ifndef LOG_PATH
-
-#define LOG_PATH "bin/log.txt"
-
-#endif
 
 using std::string;
 
@@ -13,11 +8,10 @@ namespace Atlas {
 	namespace CORE {
 		namespace Errors {
 
-
 			enum ErrorType {
 				None = -2,
 				Unknown = -1,
-				CORE = 0,
+				Core = 0,
 				ShaderCompilation = 1,
 				Buffer = 2,
 				Math = 3,
@@ -55,8 +49,11 @@ namespace Atlas {
 					string t_File, string t_Function, int t_Line);
 
 				string GetErrorMessage();
+
 				void LogErrorToFile();
 				void LogErrorToFile(string path);
+				
+				void LogDebugInfoToFile();
 			};
 		}
 	}

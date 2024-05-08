@@ -14,7 +14,7 @@ Mesh::Mesh() {
 	this->indexCount = 0;
 
 	this->vertexSize = sizeof(float) * this->vertexCount;
-	this->indexSize = sizeof(float) * this->indexCount;
+	this->indexSize = sizeof(unsigned int) * this->indexCount;
 }
 
 Mesh::Mesh(void* Vertices, unsigned int VertexCount, void* Indices, unsigned int IndexCount) {
@@ -25,5 +25,5 @@ Mesh::Mesh(void* Vertices, unsigned int VertexCount, void* Indices, unsigned int
 	this->indexCount = IndexCount;
 	
 	this->vertexSize = sizeof(float) * this->vertexCount;
-	this->indexSize = sizeof(float) * this->indexCount;
+	this->indexSize = sizeof(unsigned int) * this->indexCount;
 }

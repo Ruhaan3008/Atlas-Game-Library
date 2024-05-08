@@ -20,7 +20,11 @@ namespace Atlas {
 			//Sets the window to full screen mode.
 			void SetFullScreen();
 
+			//Makes the window resizable if true is passes
 			void Resizable(bool resizable);
+
+			//Return true if a window close event is detected
+			bool ShouldClose() { return glfwWindowShouldClose(m_Window); }
 			
 			//Constructor. Creates a new window.
 			Window();

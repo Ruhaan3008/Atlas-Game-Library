@@ -6,6 +6,7 @@
 #ifdef ENABLE_ERROR_LOG
 
 #include "Errors/Error_Struct.h"
+#include "Errors/Error_Definition.h"
 
 #endif
 

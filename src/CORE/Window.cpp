@@ -4,6 +4,14 @@
 
 #include "../Atlas.h"
 
+#ifdef ENABLE_DEBUG_LOG
+#include "Errors/Error_Definition.h"
+#include "Errors/Error_struct.h"
+
+using namespace Atlas::CORE::Errors;
+
+#endif
+
 using namespace Atlas::CORE;
 
 void Window::SetFullScreen() {
@@ -72,7 +80,16 @@ Window::Window() {
     //Initiate glew aka Modern OpenGL
     glewInit();
 
-    std::cout << glGetString(GL_VERSION) << '\n';
+#ifdef ENABLE_DEBUG_LOG
+
+    string message = "Running version: ";
+    message += (string) (char*) glGetString(GL_VERSION);
+
+    Error DebugMsg = Error(OpenGL, Info, message, ErrorOrigin);
+
+    DebugMsg.LogErrorToFile();
+
+#endif
 }
 Window::Window(int height, int width, const char* windowName){
     glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
@@ -94,7 +111,17 @@ Window::Window(int height, int width, const char* windowName){
     //Initiate glew aka Modern OpenGL
     glewInit();
 
-    std::cout << glGetString(GL_VERSION) << '\n';
+#ifdef ENABLE_DEBUG_LOG
+
+    string message = "Running version: ";
+    message += (string)(char*)glGetString(GL_VERSION);
+
+    Error DebugMsg = Error(OpenGL, Info, message, ErrorOrigin);
+
+    DebugMsg.LogErrorToFile();
+
+#endif
+
 }
 Window::~Window() {
     Window::Terminate();

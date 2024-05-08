@@ -1,9 +1,6 @@
 #include <iostream>
 
-#define ENABLE_ERROR_LOG
-
 #include "../src/Atlas.h"
-#include <GLFW/glfw3.h>
 
 using namespace Atlas::CORE;
 using namespace Atlas::CORE::Errors;
@@ -52,7 +49,7 @@ int main() {
     //Main Game Loop
 
     /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(application.GetInstance()))
+    while (!(application.ShouldClose()))
     {
         application.Update();
     }

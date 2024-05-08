@@ -5,6 +5,12 @@
 
 using namespace Atlas::Graphics;
 
+#ifdef ENABLE_ERROR_LOG
+
+using namespace Atlas::CORE::Errors;
+
+#endif
+
 unsigned int Shader::CreateComponentShader(GLenum type,string ShaderSource) {
 	//compiles component shader
 	unsigned int shader = glCreateShader(type);
@@ -14,6 +20,7 @@ unsigned int Shader::CreateComponentShader(GLenum type,string ShaderSource) {
 
 	//handle errors in the source code
 
+#ifdef ENABLE_ERROR_LOG
 	int result;
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &result);
 
@@ -25,13 +32,21 @@ unsigned int Shader::CreateComponentShader(GLenum type,string ShaderSource) {
 		char* message = (char*)malloc(lenght * sizeof(char));
 		glGetShaderInfoLog(shader, lenght, &lenght, message);
 
-		std::cout << "[Shader Compilation Error]: ";
+		/*std::cout << "[Shader Compilation Error]: ";
 		std::cout << message << '\n';
 		std::cout << ShaderSource << '\n';
 		std::cout << '\n';
-		std::cout << '\n';
+		std::cout << '\n';*/
+
+		string FinalMessage = "";
+		FinalMessage += message;
+		FinalMessage += '\n' + ShaderSource;
+
+		Error ShaderError(ShaderCompilation, Moderate, FinalMessage, ErrorOrigin);
+		ShaderError.LogErrorToFile();
 
 		free(message);
+#endif
 	}
 
 	return shader;
