@@ -11,5 +11,3 @@
 #include "CORE/CORE.h"
 #include "Graphics/Graphics.h"
 #include "Math/Math.h"
-
-typedef std::string string;

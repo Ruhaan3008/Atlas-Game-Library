@@ -7,6 +7,7 @@
 
 #include "Errors/Error_Struct.h"
 #include "Errors/Error_Definition.h"
+#include "Errors/Log_File.h"
 
 #endif
 
@@ -17,6 +18,6 @@ namespace Atlas {
 		void AtlasInnit();
 
 		//Terminates GLFW
-		void TerminateGLFW();
+		void AtlasTerminate();
 	}
 }

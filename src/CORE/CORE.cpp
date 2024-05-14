@@ -33,6 +33,6 @@ void Atlas::CORE::AtlasInnit(){
 
 }
 
-void Atlas::CORE::TerminateGLFW() {
+void Atlas::CORE::AtlasTerminate() {
     glfwTerminate();
 }

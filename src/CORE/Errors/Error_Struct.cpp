@@ -1,5 +1,7 @@
 #pragma once
 
+#ifdef ENABLE_ERROR_LOG
+
 #include <iostream>
 #include <fstream>
 
@@ -10,7 +12,7 @@
 
 using namespace Atlas::CORE::Errors;
 
-static string ErrorSeverityToString(ErrorSeverity s) {
+static string Atlas::CORE::Errors::ErrorSeverityToString(ErrorSeverity s) {
 
 	switch (s) {
 
@@ -40,7 +42,7 @@ static string ErrorSeverityToString(ErrorSeverity s) {
 
 }
 
-static string ErrorTypeToString(ErrorType e) {
+static string Atlas::CORE::Errors::ErrorTypeToString(ErrorType e) {
 	switch (e) {
 	case Unknown:
 		return "Unknown";
@@ -183,3 +185,5 @@ void Atlas::CORE::Errors::Error::LogDebugInfoToFile()
 		//TODO: Make exception handling for.
 	}
 }
+
+#endif

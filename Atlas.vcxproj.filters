@@ -54,6 +54,9 @@
     <ClCompile Include="src\CORE\CORE.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\CORE\Errors\Log_File.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\Shaders\BasicVertexShader.glsl">
@@ -113,6 +116,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\CORE\Errors\Error_Definition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CORE\Errors\Log_File.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

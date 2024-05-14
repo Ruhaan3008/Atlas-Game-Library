@@ -1,5 +1,7 @@
 #pragma once
 
+#ifdef ENABLE_ERROR_LOG
+
 #include <iostream>
 
 using std::string;
@@ -28,6 +30,9 @@ namespace Atlas {
 				Fatal, //Execution will stop
 
 			};
+
+			static string ErrorTypeToString(ErrorType s);
+			static string ErrorSeverityToString(ErrorSeverity s);
 
 			struct Error {
 				ErrorType Type;
@@ -58,3 +63,5 @@ namespace Atlas {
 		}
 	}
 }
+
+#endif

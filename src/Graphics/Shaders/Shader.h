@@ -3,8 +3,6 @@
 
 #include "../Graphics.h"
 
-typedef std::string string;
-
 namespace Atlas {
 	namespace Graphics {
 		class Shader {
@@ -16,24 +14,24 @@ namespace Atlas {
 
 		public:
 
-			string vertexShaderPath;
-			string fragmentShaderPath;
+			std::string vertexShaderPath;
+			std::string fragmentShaderPath;
 
-			string vertexShaderSource;
-			string fragmentShaderSource;
+			std::string vertexShaderSource;
+			std::string fragmentShaderSource;
 
 
 			//Create and compile the master shader. NOTE: Works only if the component shader have been compiled.
 			void CreateShader();
 
 			//Compiles component shader with the source code. NOTE: Shader source code is the parameter, not file path
-			unsigned int CreateComponentShader(GLenum type,string ShaderSource);
+			unsigned int CreateComponentShader(GLenum type,std::string ShaderSource);
 
 			//Reads the source code from the glsl file.
-			string ReadShaderFile(string path);
+			std::string ReadShaderFile(std::string path);
 
 			//Gets the location of the uniform. To write to the uniform use glUniform
-			int GetUniform(char uniformName);
+			int GetUniform(const char* uniformName);
 
 			//Returns the shader ID
 			unsigned int GetShaderID() const { return m_ShaderID; };
@@ -41,7 +39,7 @@ namespace Atlas {
 			//Makes a default white shader.
 			Shader();
 			//Makes the shader with the file path.
-			Shader(string VertexShaderPath, string FragmentShaderPath);
+			Shader(std::string VertexShaderPath, std::string FragmentShaderPath);
 
 			//Free memory and shaders
 			~Shader();

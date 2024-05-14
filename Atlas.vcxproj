@@ -22,6 +22,7 @@
     <ClCompile Include="sample\Main.cpp" />
     <ClCompile Include="src\CORE\CORE.cpp" />
     <ClCompile Include="src\CORE\Errors\Error_Struct.cpp" />
+    <ClCompile Include="src\CORE\Errors\Log_File.cpp" />
     <ClCompile Include="src\CORE\Window.cpp" />
     <ClCompile Include="src\Graphics\Buffers\IndexBuffer.cpp" />
     <ClCompile Include="src\Graphics\Buffers\VertexArray.cpp" />
@@ -42,6 +43,7 @@
     <ClInclude Include="src\CORE\CORE.h" />
     <ClInclude Include="src\CORE\Errors\Error_Definition.h" />
     <ClInclude Include="src\CORE\Errors\Error_Struct.h" />
+    <ClInclude Include="src\CORE\Errors\Log_File.h" />
     <ClInclude Include="src\CORE\Window.h" />
     <ClInclude Include="src\Graphics\Buffers\Buffers.h" />
     <ClInclude Include="src\Graphics\Buffers\IndexBuffer.h" />
@@ -140,12 +142,13 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>GLEW_STATIC;ENABLE_ERROR_LOG;ENABLE_DEBUG_LOG;GLEW_STATICGLEW_STATIC_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLEW_STATIC;GLEW_STATICGLEW_STATIC_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>D:\Projects\Atlas\Dependecies\GLEW\include;D:\Projects\Atlas\Dependecies\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>D:\Projects\Atlas\Dependecies\GLEW\lib\Release\x64;D:\Projects\Atlas\Dependecies\GLFW\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -157,12 +160,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>GLEW_STATIC;ENABLE_ERROR_LOG;ENABLE_DEBUG_LOG;GLEW_STATICGLEW_STATICNDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLEW_STATIC;GLEW_STATICGLEW_STATICNDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>D:\Projects\Atlas\Dependecies\GLEW\include;D:\Projects\Atlas\Dependecies\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>

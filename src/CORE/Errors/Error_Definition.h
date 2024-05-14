@@ -1,5 +1,6 @@
 #pragma once
 
+#ifdef ENABLE_ERROR_LOG
 
 #ifndef LOG_PATH
 
@@ -27,3 +28,5 @@
 * You can also log all the errors to the heap.
 * To enable that define ENABLE_HEAP_LOG
 */
+
+#endif

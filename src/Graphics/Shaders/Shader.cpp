@@ -11,7 +11,7 @@ using namespace Atlas::CORE::Errors;
 
 #endif
 
-unsigned int Shader::CreateComponentShader(GLenum type,string ShaderSource) {
+unsigned int Shader::CreateComponentShader(GLenum type,std::string ShaderSource) {
 	//compiles component shader
 	unsigned int shader = glCreateShader(type);
 	const char* src = ShaderSource.c_str();
@@ -38,7 +38,7 @@ unsigned int Shader::CreateComponentShader(GLenum type,string ShaderSource) {
 		std::cout << '\n';
 		std::cout << '\n';*/
 
-		string FinalMessage = "";
+		std::string FinalMessage = "";
 		FinalMessage += message;
 		FinalMessage += '\n' + ShaderSource;
 
@@ -47,13 +47,12 @@ unsigned int Shader::CreateComponentShader(GLenum type,string ShaderSource) {
 
 		free(message);
 #endif
-	}
 
 	return shader;
 
 }
 
-string Shader::ReadShaderFile(string path) {
+std::string Shader::ReadShaderFile(std::string path) {
 
 	std::ifstream file(path);
 
@@ -83,11 +82,11 @@ void Shader::CreateShader() {
 
 }
 
-int Shader::GetUniform(char uniformName) {
-	return glGetUniformLocation(this->m_ShaderID, &uniformName);
+int Shader::GetUniform(const char* uniformName) {
+	return glGetUniformLocation(this->m_ShaderID, uniformName);
 }
 
-Shader::Shader(string VertexShaderPath, string FragmentShaderPath) {
+Shader::Shader(std::string VertexShaderPath, std::string FragmentShaderPath) {
 	this->vertexShaderPath = VertexShaderPath;
 	this->fragmentShaderPath = FragmentShaderPath;
 
@@ -102,7 +101,7 @@ Shader::Shader(string VertexShaderPath, string FragmentShaderPath) {
 }
 
 Shader::Shader() {
-	string VertexShaderPath = 
+	std::string VertexShaderPath = 
 		"#version 450 core \n"
 		"precision highp float; \n"
 
@@ -112,7 +111,7 @@ Shader::Shader() {
 		"void main() { \n"
 		"	color = InputColor; \n"
 		"};" ;
-	string FragmentShaderPath =
+	std::string FragmentShaderPath =
 		"#version 450 core\n"
 		"precision highp float;\n"
 		"out vec4 color;\n"

@@ -3,13 +3,19 @@
 #include "../src/Atlas.h"
 
 using namespace Atlas::CORE;
+#ifdef ENABLE_ERROR_LOG
 using namespace Atlas::CORE::Errors;
+#endif
 using namespace Atlas::Graphics;
 using namespace Atlas::Graphics::Buffers;
 
 
 
-int main() {
+int WinMain() {
+
+#ifdef ENABLE_ERROR_LOG
+    ClearLogFile();
+#endif
 
     AtlasInnit();
 
@@ -43,7 +49,7 @@ int main() {
     RenderObject square(mesh, program);
 
 
-    int loc = glGetUniformLocation(program.GetShaderID(), "InputColor");
+    int loc = program.GetUniform("InputColor");
     glUniform4f(loc, 0.2f, 0.5f, 0.1f, 1);
 
     //Main Game Loop
@@ -63,6 +69,6 @@ int main() {
     square.~RenderObject();
     vao.~VertexArray();
 
-    glfwTerminate();
+    AtlasTerminate();
     return 0;
 }
