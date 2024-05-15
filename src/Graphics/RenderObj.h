@@ -7,7 +7,7 @@ using namespace Atlas::Graphics::Buffers;
 
 namespace Atlas {
 	namespace Graphics {
-		struct RenderObject {
+		class Renderer {
 		private:
 			VertexBuffer m_VertexBuffer;
 			IndexBuffer m_IndexBuffer;
@@ -22,13 +22,13 @@ namespace Atlas {
 			void SetShader(Shader shader);
 
 			//Constructor
-			RenderObject();
+			Renderer();
 
 			//Makes a Render object.
-			RenderObject(Mesh t_Mesh, Shader t_Shader);
+			Renderer(Mesh t_Mesh, Shader t_Shader);
 
 			//Destroys Render object.
-			~RenderObject();
+			~Renderer();
 
 		};
 	}

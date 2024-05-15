@@ -4,11 +4,11 @@ using namespace Atlas::Graphics;
 using namespace Atlas::Graphics::Buffers;
 
 
-RenderObject::RenderObject(){
+Renderer::Renderer(){
 
 }
 
-RenderObject::RenderObject(Mesh t_Mesh, Shader t_Shader) {
+Renderer::Renderer(Mesh t_Mesh, Shader t_Shader) {
 	mesh = t_Mesh;
 	shader = t_Shader;
 
@@ -20,7 +20,7 @@ RenderObject::RenderObject(Mesh t_Mesh, Shader t_Shader) {
 	glUseProgram(shader.GetShaderID());
 }
 
-void RenderObject::SetMesh(Mesh t_Mesh) {
+void Renderer::SetMesh(Mesh t_Mesh) {
 
 	mesh = t_Mesh;
 
@@ -31,14 +31,14 @@ void RenderObject::SetMesh(Mesh t_Mesh) {
 	m_IndexBuffer.Bind();
 }
 
-void RenderObject::SetShader(Shader t_Shader) {
+void Renderer::SetShader(Shader t_Shader) {
 	shader = t_Shader;
 
 	glUseProgram(shader.GetShaderID());
 
 }
 
-RenderObject::~RenderObject() {
+Renderer::~Renderer() {
 	m_VertexBuffer.~VertexBuffer();
 	m_IndexBuffer.~IndexBuffer();
 

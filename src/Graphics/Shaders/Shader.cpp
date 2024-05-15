@@ -11,7 +11,7 @@ using namespace Atlas::CORE::Errors;
 
 #endif
 
-unsigned int Shader::CreateComponentShader(GLenum type,std::string ShaderSource) {
+unsigned int Shader::CreateComponentShader(GLenum type, std::string ShaderSource) {
 	//compiles component shader
 	unsigned int shader = glCreateShader(type);
 	const char* src = ShaderSource.c_str();
@@ -46,6 +46,7 @@ unsigned int Shader::CreateComponentShader(GLenum type,std::string ShaderSource)
 		ShaderError.LogErrorToFile();
 
 		free(message);
+	}
 #endif
 
 	return shader;

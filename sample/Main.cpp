@@ -46,7 +46,7 @@ int WinMain() {
     //Setting up vao
     VertexArray vao = VertexArray();
 
-    RenderObject square(mesh, program);
+    Renderer square(mesh, program);
 
 
     int loc = program.GetUniform("InputColor");
@@ -66,7 +66,7 @@ int WinMain() {
 
     application.Terminate();
 
-    square.~RenderObject();
+    square.~Renderer();
     vao.~VertexArray();
 
     AtlasTerminate();
