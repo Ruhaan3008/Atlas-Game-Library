@@ -15,6 +15,7 @@ namespace Atlas {
 				void Bind();
 				void Unbind();
 
+				void SetData(const void* data, unsigned int size);
 
 				IndexBuffer();
 				IndexBuffer(const void* data, unsigned int size);

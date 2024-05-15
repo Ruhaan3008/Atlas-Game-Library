@@ -41,12 +41,7 @@ void Window::Update() {
     /* Render here */
     glClear(GL_COLOR_BUFFER_BIT);
 
-    unsigned int indices[] = {
-        0,1,2,
-        2,3,0
-    };
-
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, indices);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, NULL);
 
     /* Swap front and back buffers */
     glfwSwapBuffers(this->m_Window);
