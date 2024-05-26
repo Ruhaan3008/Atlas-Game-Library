@@ -39,10 +39,10 @@ unsigned int Shader::CreateComponentShader(GLenum type, std::string ShaderSource
 		std::cout << '\n';*/
 
 		std::string FinalMessage = "";
-		FinalMessage += message;
+		FinalMessage += (std::string) message;
 		FinalMessage += '\n' + ShaderSource;
 
-		Error ShaderError(ShaderCompilation, Moderate, FinalMessage, ErrorOrigin);
+		Error ShaderError(ErrorType::ShaderCompilation, ErrorSeverity::Moderate, FinalMessage, ErrorOrigin);
 		ShaderError.LogErrorToFile();
 
 		free(message);

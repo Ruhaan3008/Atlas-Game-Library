@@ -80,7 +80,7 @@ Window::Window() {
     string message = "Running version: ";
     message += (string) (char*) glGetString(GL_VERSION);
 
-    Error DebugMsg = Error(OpenGL, Info, message, ErrorOrigin);
+    Error DebugMsg = Error(ErrorType::OpenGL, ErrorSeverity::Info, message, ErrorOrigin);
 
     DebugMsg.LogErrorToFile();
 
@@ -111,7 +111,7 @@ Window::Window(int height, int width, const char* windowName){
     string message = "Running version: ";
     message += (string)(char*)glGetString(GL_VERSION);
 
-    Error DebugMsg = Error(OpenGL, Info, message, ErrorOrigin);
+    Error DebugMsg = Error(ErrorType::OpenGL, ErrorSeverity::Info, message, ErrorOrigin);
 
     DebugMsg.LogErrorToFile();
 

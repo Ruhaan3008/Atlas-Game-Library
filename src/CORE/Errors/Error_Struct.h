@@ -10,7 +10,7 @@ namespace Atlas {
 	namespace CORE {
 		namespace Errors {
 
-			enum ErrorType {
+			enum class ErrorType {
 				None = -2,
 				Unknown = -1,
 				Core = 0,
@@ -21,7 +21,7 @@ namespace Atlas {
 				FileRead = 5,
 				FileWrite = 6
 			};
-			enum ErrorSeverity {
+			enum class ErrorSeverity {
 				Debug, 
 				Info,
 				Warning, //Could cause unexpected outcomes

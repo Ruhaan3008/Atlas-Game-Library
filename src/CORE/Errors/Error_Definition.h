@@ -1,17 +1,19 @@
 #pragma once
 
+#ifndef ENABLE_ERROR_LOG
+#	ifdef ENABLE_DEBUG_LOG
+#		define ENABLE_ERROR_LOG
+#	endif
+#endif
+
 #ifdef ENABLE_ERROR_LOG
 
 #ifndef LOG_PATH
-
-#define LOG_PATH "bin/log.txt"
-
+#	define LOG_PATH "bin/log.txt"
 #endif
 
 #ifndef DEBUG_PATH
-
-#define DEBUG_PATH LOG_PATH
-
+#	define DEBUG_PATH LOG_PATH
 #endif
 
 

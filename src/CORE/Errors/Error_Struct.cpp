@@ -16,23 +16,23 @@ static string Atlas::CORE::Errors::ErrorSeverityToString(ErrorSeverity s) {
 
 	switch (s) {
 
-	case Debug:
+	case ErrorSeverity::Debug:
 		return "Debug";
 		break;
 
-	case Info:
+	case ErrorSeverity::Info:
 		return "Info";
 		break;
 
-	case Warning:
+	case ErrorSeverity::Warning:
 		return "Warning";
 		break;
 
-	case Moderate:
+	case ErrorSeverity::Moderate:
 		return "Moderate Error";
 		break;
 
-	case Fatal:
+	case ErrorSeverity::Fatal:
 		return "Fatal Error";
 		break;
 
@@ -44,35 +44,35 @@ static string Atlas::CORE::Errors::ErrorSeverityToString(ErrorSeverity s) {
 
 static string Atlas::CORE::Errors::ErrorTypeToString(ErrorType e) {
 	switch (e) {
-	case Unknown:
+	case ErrorType::Unknown:
 		return "Unknown";
 		break;
 
-	case ShaderCompilation:
+	case ErrorType::ShaderCompilation:
 		return "Shader Compilation";
 		break;
 
-	case Core:
+	case ErrorType::Core:
 		return "CORE";
 		break;
 
-	case Buffer:
+	case ErrorType::Buffer:
 		return "Buffer";
 		break;
 
-	case Math:
+	case ErrorType::Math:
 		return "Math";
 		break;
 
-	case OpenGL:
+	case ErrorType::OpenGL:
 		return "OpenGL";
 		break;
 
-	case FileRead:
+	case ErrorType::FileRead:
 		return "File Read";
 		break;
 
-	case FileWrite:
+	case ErrorType::FileWrite:
 		return "File Write";
 		break;
 	}
@@ -82,8 +82,8 @@ static string Atlas::CORE::Errors::ErrorTypeToString(ErrorType e) {
 
 Atlas::CORE::Errors::Error::Error()
 {
-	Type = Unknown;
-	Severity = Info;
+	Type = ErrorType::Unknown;
+	Severity = ErrorSeverity::Info;
 	ErrorCode = 0;
 	Description = "";
 	file = "";

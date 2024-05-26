@@ -11,7 +11,7 @@ void Atlas::CORE::AtlasInnit(){
     /* Initialize the library */
     if (!glfwInit()) {
 #ifdef ENABLE_ERROR_LOG
-        Error UnsuccessfulInnit = Error(OpenGL, Fatal, (string)"Could not innitiate Atlas  Game Library.", ErrorOrigin);
+        Error UnsuccessfulInnit = Error(ErrorType::OpenGL, ErrorSeverity::Fatal, (string)"Could not innitiate Atlas  Game Library.", ErrorOrigin);
 
         UnsuccessfulInnit.LogErrorToFile();
 
@@ -27,7 +27,7 @@ void Atlas::CORE::AtlasInnit(){
 
 #ifdef ENABLE_DEBUG_LOG
 
-    Error DebugInfo(Core, Info, (string) "Atlas Game Library was successfully Initiated.", ErrorOrigin);
+    Error DebugInfo(ErrorType::Core, ErrorSeverity::Info, (string) "Atlas Game Library was successfully Initiated.", ErrorOrigin);
     DebugInfo.LogErrorToFile();
 #endif 
 
