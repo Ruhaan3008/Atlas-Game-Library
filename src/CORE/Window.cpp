@@ -34,20 +34,19 @@ void Window::Resizable(bool resizable){
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 }
 
-void Window::Update() {
-    //Update screen size
-    glfwGetWindowSize(m_Window, &(this->height), &(this->width));
-
-    /* Render here */
+void Window::ClearFrame() {
     glClear(GL_COLOR_BUFFER_BIT);
+}
 
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, NULL);
-
-    /* Swap front and back buffers */
+void Window::SwapBuffer() {
     glfwSwapBuffers(this->m_Window);
+}
 
+void Window::UpdateWindowSize() {
+    glfwGetWindowSize(m_Window, &(this->height), &(this->width));
+}
 
-    /* Poll for and process events */
+void Window::PollEvents() {
     glfwPollEvents();
 }
 

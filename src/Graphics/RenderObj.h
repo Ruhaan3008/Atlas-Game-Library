@@ -21,6 +21,12 @@ namespace Atlas {
 			//Set the shader
 			void SetShader(Shader shader);
 
+			//Renders the object to the screen
+			void DrawCall();
+
+			void Bind();
+			void Unbind();
+
 			//Constructor
 			Renderer();
 

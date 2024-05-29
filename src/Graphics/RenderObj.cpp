@@ -17,7 +17,7 @@ Renderer::Renderer(Mesh t_Mesh, Shader t_Shader) {
 
 	m_VertexBuffer.Bind();
 
-	glUseProgram(shader.GetShaderID());
+	shader.Use();
 }
 
 void Renderer::SetMesh(Mesh t_Mesh) {
@@ -29,6 +29,26 @@ void Renderer::SetMesh(Mesh t_Mesh) {
 
 	m_VertexBuffer.Bind();
 	m_IndexBuffer.Bind();
+}
+
+void Renderer::DrawCall() {
+	this->Bind();
+
+	shader.Use();
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+}
+
+void Renderer::Bind() {
+	m_VertexBuffer.Bind();
+	m_IndexBuffer.Bind();
+
+}
+
+void Renderer::Unbind() {
+	m_VertexBuffer.Unbind();
+	m_IndexBuffer.Unbind();
+
 }
 
 void Renderer::SetShader(Shader t_Shader) {

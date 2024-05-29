@@ -36,6 +36,11 @@ namespace Atlas {
 			//Returns the shader ID
 			unsigned int GetShaderID() const { return m_ShaderID; };
 
+			//Uses shader for rendering.
+			void Use() {
+				glUseProgram(m_ShaderID);
+			};
+
 			//Makes a default white shader.
 			Shader();
 			//Makes the shader with the file path.

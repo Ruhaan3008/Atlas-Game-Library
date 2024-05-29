@@ -26,18 +26,30 @@ int WinMain() {
 
     //Mesh data
     float points[] = {
-        -0.5, -0.5f, //0
+        -0.5f, -0.5f, //0
         0.5f, -0.5f, //1
         0.5f, 0.5f,  //2
         -0.5f, 0.5f  //3
 
     };
+
+    float points2[] = {
+        -0.3f, -0.3f, //0
+        0.3f, -0.3f, //1
+        0.3f, 0.3f,  //2
+        -0.3f, 0.3f  //3
+
+    };
+
+
     unsigned int indices[] = {
         0,1,2,
         2,3,0
     };
 
     Mesh mesh = Mesh(points, 8, indices, 6);
+
+    Mesh mesh2 = Mesh(points2, 8, indices, 6);
 
     Shader program = Shader("res/Shaders/BasicVertexShader.glsl", "res/Shaders/BasicFragmentShader.glsl");
 
@@ -48,6 +60,8 @@ int WinMain() {
 
     Renderer square(mesh, program);
 
+    Renderer square2(mesh2, program);
+
 
     int loc = program.GetUniform("InputColor");
     glUniform4f(loc, 0.2f, 0.5f, 0.1f, 1);
@@ -57,7 +71,18 @@ int WinMain() {
     /* Loop until the user closes the window */
     while (!(application.ShouldClose()))
     {
-        application.Update();
+        application.ClearFrame();
+
+
+        glUniform4f(loc, 0.2f, 0.5f, 0.1f, 1);
+        square.DrawCall();
+
+
+        glUniform4f(loc, 0.2f, 0.0f, 0.1f, 1);
+        square2.DrawCall();
+
+        application.SwapBuffer();
+        application.PollEvents();
     }
 
     //Terminate

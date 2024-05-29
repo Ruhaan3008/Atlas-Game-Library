@@ -12,8 +12,18 @@ namespace Atlas {
 			int height;
 			int width;
 
-			//Updates Window
-			void Update();
+			//Clears the window
+			void ClearFrame();
+
+			//Swaps the Frame Buffer
+			void SwapBuffer();
+
+			//Update window size variable
+			void UpdateWindowSize();
+
+			//Gathers all the inputs
+			void PollEvents();
+
 			//Terminates this Window
 			void Terminate();
 
