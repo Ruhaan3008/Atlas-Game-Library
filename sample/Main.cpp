@@ -53,6 +53,11 @@ int WinMain() {
 
     Shader program = Shader("res/Shaders/BasicVertexShader.glsl", "res/Shaders/BasicFragmentShader.glsl");
 
+    Texture texture;
+    texture.SetTexture("res/Textures/brick.jpg");
+
+    texture.Bind();
+
     //Load Scene
 
     //Setting up vao
@@ -64,7 +69,8 @@ int WinMain() {
 
 
     int loc = program.GetUniform("InputColor");
-    glUniform4f(loc, 0.2f, 0.5f, 0.1f, 1);
+    int texLoc = program.GetUniform("InputColor");
+    glUniform1i(texLoc, 0);
 
     //Main Game Loop
 
@@ -75,11 +81,11 @@ int WinMain() {
 
 
         glUniform4f(loc, 0.2f, 0.5f, 0.1f, 1);
-        square.DrawCall();
+        square.Draw();
 
 
         glUniform4f(loc, 0.2f, 0.0f, 0.1f, 1);
-        square2.DrawCall();
+        square2.Draw();
 
         application.SwapBuffer();
         application.PollEvents();

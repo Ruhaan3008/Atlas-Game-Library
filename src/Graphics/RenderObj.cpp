@@ -31,7 +31,7 @@ void Renderer::SetMesh(Mesh t_Mesh) {
 	m_IndexBuffer.Bind();
 }
 
-void Renderer::DrawCall() {
+void Renderer::Draw() {
 	this->Bind();
 
 	shader.Use();

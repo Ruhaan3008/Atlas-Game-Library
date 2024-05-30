@@ -11,6 +11,9 @@ namespace Atlas {
 		private:
 			VertexBuffer m_VertexBuffer;
 			IndexBuffer m_IndexBuffer;
+
+			void Bind();
+			void Unbind();
 		public:
 			Mesh mesh;
 			Shader shader;
@@ -22,10 +25,7 @@ namespace Atlas {
 			void SetShader(Shader shader);
 
 			//Renders the object to the screen
-			void DrawCall();
-
-			void Bind();
-			void Unbind();
+			void Draw();
 
 			//Constructor
 			Renderer();

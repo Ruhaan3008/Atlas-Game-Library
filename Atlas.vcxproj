@@ -30,6 +30,8 @@
     <ClCompile Include="src\Graphics\RenderObj.cpp" />
     <ClCompile Include="src\Graphics\Shaders\Shader.cpp" />
     <ClCompile Include="src\Graphics\Structs\Mesh.cpp" />
+    <ClCompile Include="src\Graphics\Textures\STBI\STBI.cpp" />
+    <ClCompile Include="src\Graphics\Textures\Texture.cpp" />
     <ClCompile Include="src\Math\util\math_util.cpp" />
     <ClCompile Include="src\Math\Vectors\Vector2.cpp" />
     <ClCompile Include="src\Math\Vectors\Vector3.cpp" />
@@ -39,6 +41,7 @@
     <None Include="res\Shaders\BasicVertexShader.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="C:\Users\ruhaa\Downloads\stb_image.h" />
     <ClInclude Include="src\Atlas.h" />
     <ClInclude Include="src\CORE\CORE.h" />
     <ClInclude Include="src\CORE\Errors\Error_Definition.h" />
@@ -54,6 +57,8 @@
     <ClInclude Include="src\Graphics\Shaders\Shader.h" />
     <ClInclude Include="src\Graphics\Structs\Mesh.h" />
     <ClInclude Include="src\Graphics\Structs\Structs.h" />
+    <ClInclude Include="src\Graphics\Textures\STBI\stb_image.h" />
+    <ClInclude Include="src\Graphics\Textures\Texture.h" />
     <ClInclude Include="src\Math\Math.h" />
     <ClInclude Include="src\Math\util\math_util.h" />
     <ClInclude Include="src\Math\Vectors\Vectors.h" />
