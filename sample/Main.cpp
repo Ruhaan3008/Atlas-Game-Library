@@ -53,9 +53,9 @@ int WinMain() {
 
     Shader program = Shader("res/Shaders/BasicVertexShader.glsl", "res/Shaders/BasicFragmentShader.glsl");
 
-    Texture texture;
-    texture.SetTexture("res/Textures/brick.jpg");
+    Texture texture("res/Textures/brick.jpg");
 
+    texture.slot = 3;
     texture.Bind();
 
     //Load Scene
@@ -69,8 +69,8 @@ int WinMain() {
 
 
     int loc = program.GetUniform("InputColor");
-    int texLoc = program.GetUniform("InputColor");
-    glUniform1i(texLoc, 0);
+    int texLoc = program.GetUniform("Tex");
+    glUniform1i(texLoc, 3);
 
     //Main Game Loop
 

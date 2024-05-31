@@ -39,7 +39,9 @@ unsigned int Shader::CreateComponentShader(GLenum type, std::string ShaderSource
 		std::cout << '\n';*/
 
 		std::string FinalMessage = "";
-		FinalMessage += (std::string) message;
+		if (message != 0) {
+			FinalMessage += (std::string)message;
+		}
 		FinalMessage += '\n' + ShaderSource;
 
 		Error ShaderError(ErrorType::ShaderCompilation, ErrorSeverity::Moderate, FinalMessage, ErrorOrigin);
@@ -85,6 +87,11 @@ void Shader::CreateShader() {
 
 int Shader::GetUniform(const char* uniformName) {
 	return glGetUniformLocation(this->m_ShaderID, uniformName);
+}
+
+void Shader::SetUniformTexture(const char* textureName, Texture texture) {
+	int loc = this->GetUniform(textureName);
+	glUniform1i(loc, int(texture.slot));
 }
 
 Shader::Shader(std::string VertexShaderPath, std::string FragmentShaderPath) {

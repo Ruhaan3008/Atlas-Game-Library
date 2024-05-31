@@ -15,7 +15,7 @@ namespace Atlas {
 
 			int colorChannels;
 
-			int textureSlot;
+			int slot;
 
 			void SetTexture(const char* path);
 
@@ -23,6 +23,7 @@ namespace Atlas {
 			void Unbind();
 
 			Texture();
+			Texture(const char* path);
 			~Texture();
 		};
 	}

@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 
-#include "../Graphics.h"
+#include "../Textures/Texture.h"
 
 namespace Atlas {
 	namespace Graphics {
@@ -32,6 +32,8 @@ namespace Atlas {
 
 			//Gets the location of the uniform. To write to the uniform use glUniform
 			int GetUniform(const char* uniformName);
+
+			void SetUniformTexture(const char* textureName, Texture texture);
 
 			//Returns the shader ID
 			unsigned int GetShaderID() const { return m_ShaderID; };
