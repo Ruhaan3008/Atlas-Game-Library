@@ -26,19 +26,20 @@ int WinMain() {
 
     //Mesh data
     float points[] = {
-        -0.5f, -0.5f, //0
-        0.5f, -0.5f, //1
-        0.5f, 0.5f,  //2
-        -0.5f, 0.5f  //3
+        // positions // colors // texture coords
+        0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top right
+        0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom right
+        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left
+        -0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f
 
     };
 
     float points2[] = {
-        -0.3f, -0.3f, //0
-        0.3f, -0.3f, //1
-        0.3f, 0.3f,  //2
-        -0.3f, 0.3f  //3
-
+        // positions // colors // texture coords
+        0.3f, 0.3f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top right
+        0.3f, -0.3f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom right
+        -0.3f, -0.3f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left
+        -0.3f, 0.3f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f
     };
 
 
@@ -47,9 +48,8 @@ int WinMain() {
         2,3,0
     };
 
-    Mesh mesh = Mesh(points, 8, indices, 6);
-
-    Mesh mesh2 = Mesh(points2, 8, indices, 6);
+    Mesh mesh = Mesh(points, 4, indices, 6);
+    Mesh mesh2 = Mesh(points2, 4, indices, 6);
 
     Shader program = Shader("res/Shaders/BasicVertexShader.glsl", "res/Shaders/BasicFragmentShader.glsl");
 

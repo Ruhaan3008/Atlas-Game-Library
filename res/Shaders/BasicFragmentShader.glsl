@@ -1,12 +1,11 @@
-#version 450 core
-precision highp float;
+#version 330 core
 
-out vec4 color;
+out vec4 FragColor;
+in vec3 ourColor;
 in vec2 TexCoord;
 
-uniform vec4 InputColor;
-uniform sampler2D Tex;
+uniform sampler2D ourTexture;
 
-void main() { 
-	color = InputColor + texture(Tex, TexCoord);
-};
+void main() {
+	FragColor = texture(ourTexture, TexCoord);
+}
