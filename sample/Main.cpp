@@ -60,9 +60,6 @@ int WinMain() {
 
     //Load Scene
 
-    //Setting up vao
-    VertexArray vao = VertexArray();
-
     Renderer square(mesh, program);
 
     Renderer square2(mesh2, program);
@@ -88,17 +85,17 @@ int WinMain() {
         square2.Draw();
 
         application.SwapBuffer();
-        application.PollEvents();
+        PollEvents();
     }
 
     //Terminate
 
     //Errors::CheckError();
 
-    application.Terminate();
+    application.DestroyWindow();
 
     square.~Renderer();
-    vao.~VertexArray();
+    square2.~Renderer();
 
     AtlasTerminate();
     return 0;

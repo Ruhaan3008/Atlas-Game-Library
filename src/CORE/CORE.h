@@ -17,6 +17,9 @@ namespace Atlas {
 		//Initiates Atlas
 		void AtlasInnit();
 
+		//Gather all inputs
+		void PollEvents();
+
 		//Terminates GLFW
 		void AtlasTerminate();
 	}

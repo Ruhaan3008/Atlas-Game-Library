@@ -46,53 +46,22 @@ void Window::UpdateWindowSize() {
     glfwGetWindowSize(m_Window, &(this->height), &(this->width));
 }
 
-void Window::PollEvents() {
-    glfwPollEvents();
+void Window::FrameBufferSizeCallBack(GLFWwindow* window, int t_Width, int t_Height) {
+    glViewport(0, 0, t_Width, t_Height);
 }
 
-void Window::Terminate() {
+void Window::DestroyWindow() {
     glfwDestroyWindow(this->m_Window);
 }
 
-Window::Window() {
-
-    glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
-
-    this->height = 480;
-    this->width = 640;
-
-    /* Create a windowed mode window and its OpenGL context */
-    m_Window = glfwCreateWindow(640, 480, "Atlas", NULL, NULL);
-    if (!m_Window)
-    {
-        glfwTerminate();
-    }
-
-    /* Make the window's context current */
-    glfwMakeContextCurrent(m_Window);
-
-    //Initiate glew aka Modern OpenGL
-    glewInit();
-
-#ifdef ENABLE_DEBUG_LOG
-
-    string message = "Running version: ";
-    message += (string) (char*) glGetString(GL_VERSION);
-
-    Error DebugMsg = Error(ErrorType::OpenGL, ErrorSeverity::Info, message, ErrorOrigin);
-
-    DebugMsg.LogErrorToFile();
-
-#endif
-}
-Window::Window(int height, int width, const char* windowName){
+void Window::Initiate(int t_Height, int t_Width, const char* windowName) {
     glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
 
     this->height = height;
     this->width = width;
 
     /* Create a windowed mode window and its OpenGL context */
-    m_Window = glfwCreateWindow(width, height, windowName, NULL, NULL);
+    m_Window = glfwCreateWindow(t_Width, t_Height, windowName, NULL, NULL);
 
     if (!m_Window)
     {
@@ -102,21 +71,34 @@ Window::Window(int height, int width, const char* windowName){
     /* Make the window's context current */
     glfwMakeContextCurrent(m_Window);
 
+    glfwSetFramebufferSizeCallback(m_Window, Window::FrameBufferSizeCallBack);
+
     //Initiate glew aka Modern OpenGL
     glewInit();
 
-#ifdef ENABLE_DEBUG_LOG
+    glGenVertexArrays(1, &(this->m_VertexArrayID));
+    glBindVertexArray(this->m_VertexArrayID);
 
-    string message = "Running version: ";
-    message += (string)(char*)glGetString(GL_VERSION);
+    #ifdef ENABLE_DEBUG_LOG
+    {
+        string message = "Running version: ";
+        message += (string)(char*)glGetString(GL_VERSION);
 
-    Error DebugMsg = Error(ErrorType::OpenGL, ErrorSeverity::Info, message, ErrorOrigin);
+        Error DebugMsg = Error(ErrorType::OpenGL, ErrorSeverity::Info, message, ErrorOrigin);
 
-    DebugMsg.LogErrorToFile();
-
-#endif
+        DebugMsg.LogErrorToFile();
+    }
+    #endif
 
 }
+
+Window::Window() {
+    this->Initiate(420, 690, "Atlas");
+}
+Window::Window(int t_Height, int t_Width, const char* windowName){
+    this->Initiate(t_Height, t_Width, windowName);
+}
 Window::~Window() {
-    Window::Terminate();
+    glDeleteVertexArrays(1, &(this->m_VertexArrayID));
+    Window::DestroyWindow();
 }

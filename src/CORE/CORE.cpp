@@ -33,6 +33,11 @@ void Atlas::CORE::AtlasInnit(){
 
 }
 
+void Atlas::CORE::PollEvents() {
+    glfwPollEvents();
+
+}
+
 void Atlas::CORE::AtlasTerminate() {
     glfwTerminate();
 }

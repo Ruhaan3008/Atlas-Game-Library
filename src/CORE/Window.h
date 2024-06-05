@@ -6,6 +6,13 @@ namespace Atlas {
 		private:
 			//Instance
 			GLFWwindow* m_Window;
+			unsigned int m_VertexArrayID;
+
+			//Window initialization
+			inline void Initiate(int t_Height, int t_Width, const char* windowName);
+
+			//Screen coordinates reset after window resize
+			static void FrameBufferSizeCallBack(GLFWwindow* window, int t_Width, int t_Height);
 
 		public:
 
@@ -21,11 +28,8 @@ namespace Atlas {
 			//Update window size variable
 			void UpdateWindowSize();
 
-			//Gathers all the inputs
-			void PollEvents();
-
 			//Terminates this Window
-			void Terminate();
+			void DestroyWindow();
 
 			//Sets the window to full screen mode.
 			void SetFullScreen();
@@ -38,7 +42,7 @@ namespace Atlas {
 			
 			//Constructor. Creates a new window.
 			Window();
-			Window(int height, int width, const char* windowName);
+			Window(int t_Height, int t_Width, const char* windowName);
 			//Destructor. Closes the window.
 			~Window();
 		
