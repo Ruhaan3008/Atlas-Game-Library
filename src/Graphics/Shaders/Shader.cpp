@@ -11,7 +11,7 @@ using namespace Atlas::CORE::Errors;
 
 #endif
 
-unsigned int Shader::CreateComponentShader(GLenum type, std::string ShaderSource) {
+unsigned int Shader::CompileComponentShader(GLenum type, std::string ShaderSource) {
 	//compiles component shader
 	unsigned int shader = glCreateShader(type);
 	const char* src = ShaderSource.c_str();
@@ -20,36 +20,32 @@ unsigned int Shader::CreateComponentShader(GLenum type, std::string ShaderSource
 
 	//handle errors in the source code
 
-#ifdef ENABLE_ERROR_LOG
-	int result;
-	glGetShaderiv(shader, GL_COMPILE_STATUS, &result);
+	#ifdef ENABLE_ERROR_LOG
+	{
+		int result;
+		glGetShaderiv(shader, GL_COMPILE_STATUS, &result);
 
-	//check if ther are any errors
-	if (result == GL_FALSE) {
-		//Creating the error message
-		int lenght;
-		glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &lenght);
-		char* message = (char*)malloc(lenght * sizeof(char));
-		glGetShaderInfoLog(shader, lenght, &lenght, message);
+		//check if ther are any errors
+		if (result == GL_FALSE) {
+			//Creating the error message
+			int lenght;
+			glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &lenght);
+			char* message = (char*)malloc(lenght * sizeof(char));
+			glGetShaderInfoLog(shader, lenght, &lenght, message);
 
-		/*std::cout << "[Shader Compilation Error]: ";
-		std::cout << message << '\n';
-		std::cout << ShaderSource << '\n';
-		std::cout << '\n';
-		std::cout << '\n';*/
+			std::string FinalMessage = "";
+			if (message != 0) {
+				FinalMessage += (std::string)message;
+			}
+			FinalMessage += '\n' + ShaderSource;
 
-		std::string FinalMessage = "";
-		if (message != 0) {
-			FinalMessage += (std::string)message;
+			Error ShaderError(ErrorType::ShaderCompilation, ErrorSeverity::Moderate, FinalMessage, ErrorOrigin);
+			ShaderError.LogErrorToFile();
+
+			free(message);
 		}
-		FinalMessage += '\n' + ShaderSource;
-
-		Error ShaderError(ErrorType::ShaderCompilation, ErrorSeverity::Moderate, FinalMessage, ErrorOrigin);
-		ShaderError.LogErrorToFile();
-
-		free(message);
 	}
-#endif
+	#endif
 
 	return shader;
 
@@ -70,11 +66,9 @@ std::string Shader::ReadShaderFile(std::string path) {
 	return ss.str();
 }
 
-void Shader::CreateShader() {
+void Shader::CombineComponentShaders() {
 	//vertex and fragment shader
 	this->m_ShaderID = glCreateProgram();
-	//unsigned int vertexShader = Shader::CreateComponentShader(GL_VERTEX_SHADER, this->vertexShaderSource);
-	//unsigned int fragmentShader = Shader::CreateComponentShader(GL_FRAGMENT_SHADER, this->fragmentShaderSource);
 
 	//attaches component shader to master shaders
 	glAttachShader(this->m_ShaderID, this->m_VertexShaderID);
@@ -94,48 +88,37 @@ void Shader::SetUniformTexture(const char* textureName, Texture texture) {
 	glUniform1i(loc, int(texture.slot));
 }
 
-Shader::Shader(std::string VertexShaderPath, std::string FragmentShaderPath) {
+Shader::Shader(const std::string VertexShaderPath, const std::string FragmentShaderPath) {
+	this->m_ShaderID = glCreateProgram();
+
 	this->vertexShaderPath = VertexShaderPath;
 	this->fragmentShaderPath = FragmentShaderPath;
 
 	this->vertexShaderSource = ReadShaderFile(this->vertexShaderPath);
 	this->fragmentShaderSource = ReadShaderFile(this->fragmentShaderPath);
 
-	this->m_VertexShaderID = CreateComponentShader(GL_VERTEX_SHADER, this->vertexShaderSource);
-	this->m_FragmentShaderID = CreateComponentShader(GL_FRAGMENT_SHADER, this->fragmentShaderSource);
+	this->m_VertexShaderID = CompileComponentShader(GL_VERTEX_SHADER, this->vertexShaderSource);
+	this->m_FragmentShaderID = CompileComponentShader(GL_FRAGMENT_SHADER, this->fragmentShaderSource);
 
-	CreateShader();
+	CombineComponentShaders();
 
 }
 
 Shader::Shader() {
-	std::string VertexShaderPath = 
-		"#version 450 core \n"
-		"precision highp float; \n"
+	this->m_ShaderID = glCreateProgram();
 
-		"out vec4 color; \n"
-		"uniform vec4 InputColor; \n"
+	std::string VertexShaderSource = "";
+	std::string FragmentShaderSource = "";
+	this->vertexShaderPath = "";
+	this->fragmentShaderPath = "";
 
-		"void main() { \n"
-		"	color = InputColor; \n"
-		"};" ;
-	std::string FragmentShaderPath =
-		"#version 450 core\n"
-		"precision highp float;\n"
-		"out vec4 color;\n"
-		"void main() {\n"
-		"color = vec4(1,1,1,1);\n"
-		"}; \n";
-	this->vertexShaderPath = VertexShaderPath;
-	this->fragmentShaderPath = FragmentShaderPath;
+	this->vertexShaderSource = VertexShaderSource;
+	this->fragmentShaderSource = FragmentShaderSource;
 
-	this->vertexShaderSource = ReadShaderFile(this->vertexShaderPath);
-	this->fragmentShaderSource = ReadShaderFile(this->fragmentShaderPath);
+	this->m_VertexShaderID = CompileComponentShader(GL_VERTEX_SHADER, this->vertexShaderSource);
+	this->m_FragmentShaderID = CompileComponentShader(GL_FRAGMENT_SHADER, this->fragmentShaderSource);
 
-	this->m_VertexShaderID = CreateComponentShader(GL_VERTEX_SHADER, this->vertexShaderSource);
-	this->m_FragmentShaderID = CreateComponentShader(GL_FRAGMENT_SHADER, this->fragmentShaderSource);
-
-	CreateShader();
+	CombineComponentShaders();
 
 }
 
