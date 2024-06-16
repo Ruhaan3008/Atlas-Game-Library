@@ -32,16 +32,12 @@
     <ClCompile Include="src\Graphics\Structs\Mesh.cpp" />
     <ClCompile Include="src\Graphics\Textures\STBI\STBI.cpp" />
     <ClCompile Include="src\Graphics\Textures\Texture.cpp" />
-    <ClCompile Include="src\Math\util\math_util.cpp" />
-    <ClCompile Include="src\Math\Vectors\Vector2.cpp" />
-    <ClCompile Include="src\Math\Vectors\Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\Shaders\BasicFragmentShader.glsl" />
     <None Include="res\Shaders\BasicVertexShader.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\Users\ruhaa\Downloads\stb_image.h" />
     <ClInclude Include="src\Atlas.h" />
     <ClInclude Include="src\CORE\CORE.h" />
     <ClInclude Include="src\CORE\Errors\Error_Definition.h" />
@@ -59,9 +55,8 @@
     <ClInclude Include="src\Graphics\Structs\Structs.h" />
     <ClInclude Include="src\Graphics\Textures\STBI\stb_image.h" />
     <ClInclude Include="src\Graphics\Textures\Texture.h" />
+    <ClInclude Include="src\Math\Wrapper.h" />
     <ClInclude Include="src\Math\Math.h" />
-    <ClInclude Include="src\Math\util\math_util.h" />
-    <ClInclude Include="src\Math\Vectors\Vectors.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -149,7 +144,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;ENABLE_ERROR_LOG;ENABLE_DEBUG_LOG;GLEW_STATICGLEW_STATIC_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Projects\Atlas\Dependecies\GLEW\include;D:\Projects\Atlas\Dependecies\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Projects\Atlas\Dependecies\GLEW\include;D:\Projects\Atlas\Dependecies\GLFW\include;D:\Projects\Atlas\Dependecies\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -167,7 +162,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;ENABLE_ERROR_LOG;ENABLE_DEBUG_LOG;GLEW_STATICGLEW_STATICNDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Projects\Atlas\Dependecies\GLEW\include;D:\Projects\Atlas\Dependecies\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Projects\Atlas\Dependecies\GLEW\include;D:\Projects\Atlas\Dependecies\GLFW\include;D:\Projects\Atlas\Dependecies\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>

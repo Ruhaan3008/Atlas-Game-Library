@@ -7,7 +7,8 @@ using namespace Atlas::CORE;
 using namespace Atlas::CORE::Errors;
 #endif
 using namespace Atlas::Graphics;
-using namespace Atlas::Graphics::Buffers;
+using namespace Atlas::Math;
+using namespace Atlas::Math::glm;
 
 
 
@@ -34,22 +35,18 @@ int WinMain() {
 
     };
 
-    float points2[] = {
-        // positions // colors // texture coords
-        0.3f, 0.3f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top right
-        0.3f, -0.3f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom right
-        -0.3f, -0.3f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left
-        -0.3f, 0.3f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f
-    };
-
-
     unsigned int indices[] = {
         0,1,2,
         2,3,0
     };
 
+    Matrix4 TransformMatrix(1.0f);
+
+    TransformMatrix = glm::translate(TransformMatrix, Vector3(0.5f, 0.5f, 0.0f));
+    TransformMatrix = glm::rotate(TransformMatrix, glm::radians(75.0f), Vector3(0.0f, 0.5f, 0.5f));
+    TransformMatrix = glm::scale(TransformMatrix, Vector3(0.5f, 0.5f, 0.5f));
+
     Mesh mesh = Mesh(points, 4, indices, 6);
-    Mesh mesh2 = Mesh(points2, 4, indices, 6);
 
     Shader program = Shader("res/Shaders/BasicVertexShader.glsl", "res/Shaders/BasicFragmentShader.glsl");
 
@@ -62,10 +59,8 @@ int WinMain() {
 
     Renderer square(mesh, program);
 
-    Renderer square2(mesh2, program);
 
-
-    int loc = program.GetUniform("InputColor");
+    int loc = program.GetUniform("Transform");
     int texLoc = program.GetUniform("Tex");
     glUniform1i(texLoc, 3);
 
@@ -75,14 +70,11 @@ int WinMain() {
     while (!(application.ShouldClose()))
     {
         application.ClearFrame();
+        application.ClearDepthBuffer();
 
 
-        glUniform4f(loc, 0.2f, 0.5f, 0.1f, 1);
+        glUniformMatrix4fv(loc, 1, GL_FALSE, glm::value_ptr(TransformMatrix));
         square.Draw();
-
-
-        glUniform4f(loc, 0.2f, 0.0f, 0.1f, 1);
-        square2.Draw();
 
         application.SwapBuffer();
         PollEvents();
@@ -95,7 +87,6 @@ int WinMain() {
     application.DestroyWindow();
 
     square.~Renderer();
-    square2.~Renderer();
 
     AtlasTerminate();
     return 0;

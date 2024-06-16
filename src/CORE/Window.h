@@ -22,6 +22,9 @@ namespace Atlas {
 			//Clears the window
 			void ClearFrame();
 
+			//Clear Depth Buffer
+			void ClearDepthBuffer();
+
 			//Swaps the Frame Buffer
 			void SwapBuffer();
 
