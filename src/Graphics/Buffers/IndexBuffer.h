@@ -8,13 +8,14 @@ namespace Atlas {
 
 			class IndexBuffer {
 			private:
-				unsigned int id;
-				unsigned int size;
+				unsigned int m_ID;
+				unsigned int m_Size;
 
 			public:
 				void Bind();
 				void Unbind();
 
+				void SetData(const void* data, unsigned int size);
 
 				IndexBuffer();
 				IndexBuffer(const void* data, unsigned int size);

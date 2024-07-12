@@ -1,47 +1,42 @@
 #pragma once
 #include <iostream>
 
-#include "../Graphics.h"
-
-typedef std::string string;
+#include "../Textures/Texture.h"
 
 namespace Atlas {
 	namespace Graphics {
 		class Shader {
 		private:
-			unsigned int shader_id;
+			unsigned int m_ShaderID;
 
+			unsigned int m_VertexShaderID;
+			unsigned int m_FragmentShaderID;
+
+			std::string vertexShaderSource;
+			std::string fragmentShaderSource;
+
+			std::string ReadShaderFile(std::string path);
+
+			void CombineComponentShaders();
+			unsigned int CompileComponentShader(GLenum type,std::string ShaderSource);
 		public:
 
-			string vertexShaderPath;
-			string fragmentShaderPath;
-
-			string vertexShaderSource;
-			string fragmentShaderSource;
-
-			unsigned int vertexShader;
-			unsigned int fragmentShader;
+			std::string vertexShaderPath;
+			std::string fragmentShaderPath;
 
 
-			//Create and compile the master shader. NOTE: Works only if the component shader have been crated.
-			void CreateShader();
+			int GetUniform(const char* uniformName);
+			void SetUniformTexture(const char* textureName, Texture texture);
 
-			//Compiles component shader. NOTE: Shader source code is the parameter, not file path
-			unsigned int CreateComponentShader(GLenum type,string ShaderSource);
-			//Reads the source code from the glsl file.
-			string ReadShaderFile(string path);
+			unsigned int GetShaderID() const { return m_ShaderID; };
 
-			//Gets the location of the uniform. To write to the uniform use glUniform
-			int GetUniform(char uniformName);
-
-			unsigned int GetShaderID() const { return shader_id; };
+			//Uses shader for rendering.
+			void Use() { glUseProgram(m_ShaderID); };
 
 			Shader();
-			//Constructor
-			Shader(string VertexShaderPath, string FragmentShaderPath);
-			//Destructor
-			~Shader();
+			Shader(const std::string VertexShaderPath, const std::string FragmentShaderPath);
 
+			~Shader();
 		};
 	}
 }

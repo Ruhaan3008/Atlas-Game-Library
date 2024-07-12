@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -20,14 +20,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sample\Main.cpp" />
-    <ClCompile Include="src\CORE\OpenGL_Errors\OpenGL_Errors.cpp" />
-    <ClCompile Include="src\CORE\RenderPipelineErrors\RenderPipelineErrors.cpp" />
+    <ClCompile Include="src\CORE\CORE.cpp" />
+    <ClCompile Include="src\CORE\Errors\Error_Struct.cpp" />
+    <ClCompile Include="src\CORE\Errors\Log_File.cpp" />
     <ClCompile Include="src\CORE\Window.cpp" />
     <ClCompile Include="src\Graphics\Buffers\IndexBuffer.cpp" />
     <ClCompile Include="src\Graphics\Buffers\VertexArray.cpp" />
     <ClCompile Include="src\Graphics\Buffers\VertexBuffer.cpp" />
+    <ClCompile Include="src\Graphics\RenderObj.cpp" />
     <ClCompile Include="src\Graphics\Shaders\Shader.cpp" />
     <ClCompile Include="src\Graphics\Structs\Mesh.cpp" />
+    <ClCompile Include="src\Graphics\Textures\STBI\STBI.cpp" />
+    <ClCompile Include="src\Graphics\Textures\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\Shaders\BasicFragmentShader.glsl" />
@@ -36,17 +40,22 @@
   <ItemGroup>
     <ClInclude Include="src\Atlas.h" />
     <ClInclude Include="src\CORE\CORE.h" />
-    <ClInclude Include="src\CORE\OpenGL_Errors\OpenGL_Errors.h" />
-    <ClInclude Include="src\CORE\RenderPipelineErrors\RenderPipelineErrors.h" />
+    <ClInclude Include="src\CORE\Errors\Error_Definition.h" />
+    <ClInclude Include="src\CORE\Errors\Error_Struct.h" />
+    <ClInclude Include="src\CORE\Errors\Log_File.h" />
     <ClInclude Include="src\CORE\Window.h" />
     <ClInclude Include="src\Graphics\Buffers\Buffers.h" />
     <ClInclude Include="src\Graphics\Buffers\IndexBuffer.h" />
     <ClInclude Include="src\Graphics\Buffers\VertexArray.h" />
     <ClInclude Include="src\Graphics\Buffers\VertexBuffer.h" />
     <ClInclude Include="src\Graphics\Graphics.h" />
+    <ClInclude Include="src\Graphics\RenderObj.h" />
     <ClInclude Include="src\Graphics\Shaders\Shader.h" />
     <ClInclude Include="src\Graphics\Structs\Mesh.h" />
     <ClInclude Include="src\Graphics\Structs\Structs.h" />
+    <ClInclude Include="src\Graphics\Textures\STBI\stb_image.h" />
+    <ClInclude Include="src\Graphics\Textures\Texture.h" />
+    <ClInclude Include="src\Math\Math.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -132,12 +141,13 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>GLEW_STATIC;GLEW_STATICGLEW_STATIC_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLEW_STATIC;ENABLE_ERROR_LOG;ENABLE_DEBUG_LOG;GLEW_STATICGLEW_STATIC_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Projects\Atlas\Dependecies\GLEW\include;D:\Projects\Atlas\Dependecies\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Projects\Atlas\Dependecies\GLEW\include;D:\Projects\Atlas\Dependecies\GLFW\include;D:\Projects\Atlas\Dependecies\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>D:\Projects\Atlas\Dependecies\GLEW\lib\Release\x64;D:\Projects\Atlas\Dependecies\GLFW\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -149,12 +159,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>GLEW_STATIC;GLEW_STATICGLEW_STATICNDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLEW_STATIC;ENABLE_ERROR_LOG;ENABLE_DEBUG_LOG;GLEW_STATICGLEW_STATICNDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Projects\Atlas\Dependecies\GLEW\include;D:\Projects\Atlas\Dependecies\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Projects\Atlas\Dependecies\GLEW\include;D:\Projects\Atlas\Dependecies\GLFW\include;D:\Projects\Atlas\Dependecies\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>

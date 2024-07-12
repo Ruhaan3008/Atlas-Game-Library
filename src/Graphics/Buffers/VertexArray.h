@@ -8,7 +8,7 @@ namespace Atlas {
 			class VertexArray {
 			private:
 
-				unsigned int id;
+				unsigned int m_ID;
 
 			public:
 

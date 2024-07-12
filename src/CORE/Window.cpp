@@ -4,38 +4,15 @@
 
 #include "../Atlas.h"
 
+#ifdef ENABLE_DEBUG_LOG
+#include "Errors/Error_Definition.h"
+#include "Errors/Error_struct.h"
+
+using namespace Atlas::CORE::Errors;
+
+#endif
+
 using namespace Atlas::CORE;
-
-void Window::Start() {
-
-    GLFWwindow*& win = this->window;
-
-    /* Initialize the library */
-    glfwInit();
-
-    //GLFW verion
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
-
-    //Setting glfw mode to core
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-    /* Create a windowed mode window and its OpenGL context */
-    win = glfwCreateWindow(640, 480, "Atlas", NULL, NULL);
-    if (!win)
-    {
-        glfwTerminate();
-    }
-
-    /* Make the window's context current */
-    glfwMakeContextCurrent(win);
-
-    //Initiate glew aka Modern OpenGL
-    glewInit();
-
-    std::cout << glGetString(GL_VERSION) << '\n';
-
-}
 
 void Window::SetFullScreen() {
 
@@ -45,34 +22,97 @@ void Window::SetFullScreen() {
     const GLFWvidmode* mode = glfwGetVideoMode(monitor);
 
     //sets window to full screen
-    glfwSetWindowMonitor(this->window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
+    glfwSetWindowMonitor(this->m_Window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
 }
 
-void Window::Update() {
+void Window::Resizable(bool resizable){
+    if (resizable) {
+        glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+        return;
+    }
 
-    /* Render here */
+    glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+}
+
+void Window::ClearFrame() {
     glClear(GL_COLOR_BUFFER_BIT);
-
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
-
-    /* Swap front and back buffers */
-    glfwSwapBuffers(this->window);
-
-    /* Poll for and process events */
-    glfwPollEvents();
 }
 
-void Window::Terminate() {
-    glfwDestroyWindow(this->window);
+void Window::ClearDepthBuffer() {
+    glClear(GL_DEPTH_BUFFER_BIT);
 }
 
-void Atlas::CORE::TerminateGLFW() {
-    glfwTerminate();
+void Window::EnableDepthTest(){
+    glEnable(GL_DEPTH_TEST);
+
+}
+
+void Window::DisableDepthTest() {
+    glDisable(GL_DEPTH_TEST);
+
+}
+
+void Window::SwapBuffer() {
+    glfwSwapBuffers(this->m_Window);
+}
+
+void Window::UpdateWindowSize() {
+    glfwGetWindowSize(m_Window, &(this->height), &(this->width));
+}
+
+void Window::FrameBufferSizeCallBack(GLFWwindow* window, int t_Width, int t_Height) {
+    glViewport(0, 0, t_Width, t_Height);
+}
+
+void Window::DestroyWindow() {
+    glfwDestroyWindow(this->m_Window);
+}
+
+void Window::Initiate(int t_Height, int t_Width, const char* windowName) {
+    glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+
+    this->height = height;
+    this->width = width;
+
+    /* Create a windowed mode window and its OpenGL context */
+    m_Window = glfwCreateWindow(t_Width, t_Height, windowName, NULL, NULL);
+
+    if (!m_Window)
+    {
+        glfwTerminate();
+    }
+
+    /* Make the window's context current */
+    glfwMakeContextCurrent(m_Window);
+
+    glfwSetFramebufferSizeCallback(m_Window, Window::FrameBufferSizeCallBack);
+
+    //Initiate glew aka Modern OpenGL
+    glewInit();
+
+    glGenVertexArrays(1, &(this->m_VertexArrayID));
+    glBindVertexArray(this->m_VertexArrayID);
+
+    #ifdef ENABLE_DEBUG_LOG
+    {
+        string message = "Running version: ";
+        message += (string)(char*)glGetString(GL_VERSION);
+
+        Error DebugMsg = Error(ErrorType::OpenGL, ErrorSeverity::Info, message, ErrorOrigin);
+
+        DebugMsg.LogErrorToFile();
+    }
+    #endif
+
 }
 
 Window::Window() {
-    Start();
+    this->Initiate(420, 690, "Atlas");
+}
+Window::Window(int t_Height, int t_Width, const char* windowName){
+    this->Initiate(t_Height, t_Width, windowName);
 }
 Window::~Window() {
-    Window::Terminate();
+    glDeleteVertexArrays(1, &(this->m_VertexArrayID));
+    Window::DestroyWindow();
 }

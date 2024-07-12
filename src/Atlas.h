@@ -10,5 +10,4 @@
 
 #include "CORE/CORE.h"
 #include "Graphics/Graphics.h"
-
-typedef std::string string;
+#include "Math/Math.h"

@@ -1,76 +1,106 @@
 #include <iostream>
+
 #include "../src/Atlas.h"
-#include <GLFW/glfw3.h>
 
 using namespace Atlas::CORE;
+#ifdef ENABLE_ERROR_LOG
+using namespace Atlas::CORE::Errors;
+#endif
 using namespace Atlas::Graphics;
-using namespace Atlas::Graphics::Buffers;
+using namespace Atlas::glm;
 
 
-int main() {
+
+int WinMain() {
+
+    #ifdef ENABLE_ERROR_LOG
+        ClearLogFile();
+    #endif
+
+    AtlasInnit();
+
     //Initiation
-
-    Window application = Window();
+    Window application = Window(500,500, "Sample Square");
+    application.EnableDepthTest();
 
     //application.SetFullScreen();
 
-    //Mesh data
+    //Mesh Setup
     float points[] = {
-        -0.5f, -0.5f, //0
-        0.5f, -0.5f, //1
-        0.5f, 0.5f,  //2
-        -0.5f, 0.5f  //3
+        // positions // colors // texture coords
+        0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top right
+        0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom right
+        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left
+        -0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f
 
     };
+
     unsigned int indices[] = {
         0,1,2,
         2,3,0
     };
 
+    Mesh mesh = Mesh(points, 4, indices, 6);
+
+    mat4x4 TransformMatrix(1.0f);
+
+    TransformMatrix = translate(TransformMatrix, vec3(0.0f, 0.0f, -10.2f));
+    TransformMatrix = scale(TransformMatrix, vec3(1.0f, 1.0f, 1.0f));
+
+
+    //Camera Setup
+    mat4x4 Projection(1.0f);
+
+    Projection = perspective(radians(45.0f), 500.0f / 500.0f, 0.1f, 100.0f);
+
+ 
+    Shader program = Shader("res/Shaders/BasicVertexShader.glsl", "res/Shaders/BasicFragmentShader.glsl");
+
+    Texture texture("res/Textures/brick.jpg");
+
+    texture.slot = 3;
+    texture.Bind();
+
     //Load Scene
 
-    //Setting up vao
-    unsigned int vao;
-    glGenVertexArrays(1, &vao);
-    glBindVertexArray(vao);
+    Renderer square(mesh, program);
 
-    //setting up vertex buffer
-    VertexBuffer vbo(points, sizeof(points));
-    vbo.Bind();
 
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
-    glEnableVertexAttribArray(0);
-    
+    int loc = program.GetUniform("Transform");
+    int projLoc = program.GetUniform("Projection");
 
-    IndexBuffer ibo(indices, sizeof(indices));
-    ibo.Bind();
+    int texLoc = program.GetUniform("Tex");
+    glUniform1i(texLoc, 3);
 
-    Shader program = Shader("res/Shaders/BasicVertexShader.glsl", "res/Shaders/BasicFragmentShader.glsl");
-    glUseProgram(program.GetShaderID());
+    glUniformMatrix4fv(projLoc, 1, GL_FALSE, value_ptr(Projection));
 
-    int loc = glGetUniformLocation(program.GetShaderID(), "InputColor");
-    glUniform4f(loc, 1, 1, 1, 1);
 
     //Main Game Loop
 
     /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(application.window))
+    while (!(application.ShouldClose()))
     {
-        application.Update();
+        application.ClearFrame();
+        application.ClearDepthBuffer();
+
+        TransformMatrix = rotate(TransformMatrix, radians(01.0f), vec3(0.0f, 1.0f, 0.0f));
+        TransformMatrix = rotate(TransformMatrix, radians(00.0f), vec3(0.0f, 0.0f, 1.0f));
+
+        glUniformMatrix4fv(loc, 1, GL_FALSE, value_ptr(TransformMatrix));
+        square.Draw();
+
+        application.SwapBuffer();
+        PollEvents();
     }
 
     //Terminate
 
-    OpenGL_Errors::CheckError();
+    //Errors::CheckError();
 
-    application.Terminate();
+    application.DestroyWindow();
 
-    glDeleteBuffers(1, &vao);
-    vbo.Unbind();
-    ibo.Unbind();
-    vbo.~VertexBuffer();
-    ibo.~IndexBuffer();
+    square.~Renderer();
 
-    glfwTerminate();
+    AtlasTerminate();
     return 0;
 }

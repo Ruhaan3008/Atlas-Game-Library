@@ -18,12 +18,6 @@
     <ClCompile Include="sample\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\CORE\OpenGL_Errors\OpenGL_Errors.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\CORE\RenderPipelineErrors\RenderPipelineErrors.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\CORE\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -42,18 +36,34 @@
     <ClCompile Include="src\Graphics\Structs\Mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Graphics\RenderObj.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CORE\Errors\Error_Struct.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CORE\CORE.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CORE\Errors\Log_File.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\Textures\STBI\STBI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\Textures\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\Shaders\BasicVertexShader.glsl" />
-    <None Include="res\Shaders\BasicFragmentShader.glsl" />
+    <None Include="res\Shaders\BasicVertexShader.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Shaders\BasicFragmentShader.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\CORE\OpenGL_Errors\OpenGL_Errors.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\CORE\RenderPipelineErrors\RenderPipelineErrors.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\CORE\CORE.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -85,6 +95,27 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Atlas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Graphics\RenderObj.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CORE\Errors\Error_Struct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CORE\Errors\Error_Definition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CORE\Errors\Log_File.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Graphics\Textures\STBI\stb_image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Graphics\Textures\Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Math\Math.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

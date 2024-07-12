@@ -6,42 +6,40 @@
 using namespace Atlas::Graphics::Buffers;
 
 VertexBuffer::VertexBuffer() {
-    glGenBuffers(1, &id);
-    glBindBuffer(GL_ARRAY_BUFFER, id);
+    m_Size = NULL;
+    glGenBuffers(1, &m_ID);
+    glBindBuffer(GL_ARRAY_BUFFER, m_ID);
 
 }
 
 VertexBuffer::VertexBuffer(const void* data, unsigned int Size) {
-    this->size = Size;
-    glGenBuffers(1, &id);
-    glBindBuffer(GL_ARRAY_BUFFER, id);
+    this->m_Size = Size;
+    glGenBuffers(1, &m_ID);
+    glBindBuffer(GL_ARRAY_BUFFER, m_ID);
     glBufferData(GL_ARRAY_BUFFER, Size, data, GL_STATIC_DRAW);
 
 }
 void VertexBuffer::SetData(const void* data, unsigned int Size) {
-    this->size = Size;
+    this->m_Size = Size;
     glBufferData(GL_ARRAY_BUFFER, Size, data, GL_STATIC_DRAW);
 
 }
 
 VertexBuffer::~VertexBuffer() {
-    glDeleteBuffers(1, &id);
-
-}
-
-void VertexBuffer::SetAttributes(VertexBufferLayout layout) {
-    if (!layout.IsEmpty) {
-
-        GLenum normalized = layout.normalised ? GL_TRUE : GL_FALSE;
-
-        glVertexAttribPointer(0, layout.count,layout.type, normalized, layout.stride, layout.pointer);
-        glEnableVertexAttribArray(0);
-    }
+    glDeleteBuffers(1, &m_ID);
 
 }
 
 void VertexBuffer::Bind() {
-    glBindBuffer(GL_ARRAY_BUFFER, id);
+    glBindBuffer(GL_ARRAY_BUFFER, m_ID);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), 0);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*) 12);
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*) 24);
+    glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(1);
+    glEnableVertexAttribArray(2);
+
 
 }
 
@@ -49,18 +47,3 @@ void VertexBuffer::Unbind() {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 }
-
-VertexBufferLayout::VertexBufferLayout() {
-    this->IsEmpty = true;
-    this->count = NULL;
-    this->normalised = NULL;
-    this->pointer = NULL;
-    this->stride = NULL;
-    this->type = NULL;
-
-}
-
-VertexBufferLayout::VertexBufferLayout(GLenum Type, unsigned int Count,
-    void* Pointer, bool Normalized, unsigned int Stride)
-    : type(Type), count(Count), pointer(Pointer), normalised(Normalized),
-    stride(Stride), IsEmpty(false) {};
