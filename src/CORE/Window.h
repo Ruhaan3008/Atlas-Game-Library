@@ -28,6 +28,10 @@ namespace Atlas {
 			//Swaps the Frame Buffer
 			void SwapBuffer();
 
+			//Enable or disable glDepthTest
+			void EnableDepthTest();
+			void DisableDepthTest();
+
 			//Update window size variable
 			void UpdateWindowSize();
 

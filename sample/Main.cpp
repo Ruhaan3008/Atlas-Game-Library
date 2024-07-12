@@ -7,25 +7,25 @@ using namespace Atlas::CORE;
 using namespace Atlas::CORE::Errors;
 #endif
 using namespace Atlas::Graphics;
-using namespace Atlas::Math;
-using namespace Atlas::Math::glm;
+using namespace Atlas::glm;
 
 
 
 int WinMain() {
 
-#ifdef ENABLE_ERROR_LOG
-    ClearLogFile();
-#endif
+    #ifdef ENABLE_ERROR_LOG
+        ClearLogFile();
+    #endif
 
     AtlasInnit();
 
     //Initiation
     Window application = Window(500,500, "Sample Square");
+    application.EnableDepthTest();
 
     //application.SetFullScreen();
 
-    //Mesh data
+    //Mesh Setup
     float points[] = {
         // positions // colors // texture coords
         0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top right
@@ -40,14 +40,20 @@ int WinMain() {
         2,3,0
     };
 
-    Matrix4 TransformMatrix(1.0f);
-
-    TransformMatrix = glm::translate(TransformMatrix, Vector3(0.5f, 0.5f, 0.0f));
-    TransformMatrix = glm::rotate(TransformMatrix, glm::radians(75.0f), Vector3(0.0f, 0.5f, 0.5f));
-    TransformMatrix = glm::scale(TransformMatrix, Vector3(0.5f, 0.5f, 0.5f));
-
     Mesh mesh = Mesh(points, 4, indices, 6);
 
+    mat4x4 TransformMatrix(1.0f);
+
+    TransformMatrix = translate(TransformMatrix, vec3(0.0f, 0.0f, -10.2f));
+    TransformMatrix = scale(TransformMatrix, vec3(1.0f, 1.0f, 1.0f));
+
+
+    //Camera Setup
+    mat4x4 Projection(1.0f);
+
+    Projection = perspective(radians(45.0f), 500.0f / 500.0f, 0.1f, 100.0f);
+
+ 
     Shader program = Shader("res/Shaders/BasicVertexShader.glsl", "res/Shaders/BasicFragmentShader.glsl");
 
     Texture texture("res/Textures/brick.jpg");
@@ -61,8 +67,13 @@ int WinMain() {
 
 
     int loc = program.GetUniform("Transform");
+    int projLoc = program.GetUniform("Projection");
+
     int texLoc = program.GetUniform("Tex");
     glUniform1i(texLoc, 3);
+
+    glUniformMatrix4fv(projLoc, 1, GL_FALSE, value_ptr(Projection));
+
 
     //Main Game Loop
 
@@ -72,8 +83,10 @@ int WinMain() {
         application.ClearFrame();
         application.ClearDepthBuffer();
 
+        TransformMatrix = rotate(TransformMatrix, radians(01.0f), vec3(0.0f, 1.0f, 0.0f));
+        TransformMatrix = rotate(TransformMatrix, radians(00.0f), vec3(0.0f, 0.0f, 1.0f));
 
-        glUniformMatrix4fv(loc, 1, GL_FALSE, glm::value_ptr(TransformMatrix));
+        glUniformMatrix4fv(loc, 1, GL_FALSE, value_ptr(TransformMatrix));
         square.Draw();
 
         application.SwapBuffer();

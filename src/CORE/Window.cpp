@@ -42,6 +42,16 @@ void Window::ClearDepthBuffer() {
     glClear(GL_DEPTH_BUFFER_BIT);
 }
 
+void Window::EnableDepthTest(){
+    glEnable(GL_DEPTH_TEST);
+
+}
+
+void Window::DisableDepthTest() {
+    glDisable(GL_DEPTH_TEST);
+
+}
+
 void Window::SwapBuffer() {
     glfwSwapBuffers(this->m_Window);
 }
@@ -76,7 +86,6 @@ void Window::Initiate(int t_Height, int t_Width, const char* windowName) {
     glfwMakeContextCurrent(m_Window);
 
     glfwSetFramebufferSizeCallback(m_Window, Window::FrameBufferSizeCallBack);
-    glEnable(GL_DEPTH_TEST);
 
     //Initiate glew aka Modern OpenGL
     glewInit();

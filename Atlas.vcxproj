@@ -55,7 +55,6 @@
     <ClInclude Include="src\Graphics\Structs\Structs.h" />
     <ClInclude Include="src\Graphics\Textures\STBI\stb_image.h" />
     <ClInclude Include="src\Graphics\Textures\Texture.h" />
-    <ClInclude Include="src\Math\Wrapper.h" />
     <ClInclude Include="src\Math\Math.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
