@@ -6,6 +6,8 @@ First you will need to GLFW and GLEW to your project. Make sure that the GLFW an
 The source code contains STBI and glm source files also so you don't need to add them. If you want to know how to use Atlas youu can go through the Main.cpp file in sample folder.
 
 ## Why isn't Atlas working for you?
-The first reason is bacause you did not call the Atlasinnit() function. This has to be called before any other Atlas function or class. 
+- The first reason is bacause you did not call the AtlasInnit() function. This has to be called before any other Atlas function or class. 
 
-Second you must call the Window class immediately after the Atlasinnit() function.
+- Second you must call the Window class immediately after the AtlasInnit() function.
+
+- Third because this library is still in its early stages some functionality will change over time.
