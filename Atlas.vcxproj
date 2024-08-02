@@ -29,6 +29,7 @@
     <ClCompile Include="src\Graphics\Buffers\VertexBuffer.cpp" />
     <ClCompile Include="src\Graphics\RenderObj.cpp" />
     <ClCompile Include="src\Graphics\Shaders\Shader.cpp" />
+    <ClCompile Include="src\Graphics\Shaders\Uniform.cpp" />
     <ClCompile Include="src\Graphics\Structs\Mesh.cpp" />
     <ClCompile Include="src\Graphics\Textures\STBI\STBI.cpp" />
     <ClCompile Include="src\Graphics\Textures\Texture.cpp" />
@@ -55,7 +56,7 @@
     <ClInclude Include="src\Graphics\Structs\Structs.h" />
     <ClInclude Include="src\Graphics\Textures\STBI\stb_image.h" />
     <ClInclude Include="src\Graphics\Textures\Texture.h" />
-    <ClInclude Include="src\Math\Math.h" />
+    <ClInclude Include="src\Math.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

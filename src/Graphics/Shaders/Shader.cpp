@@ -83,11 +83,6 @@ int Shader::GetUniform(const char* uniformName) {
 	return glGetUniformLocation(this->m_ShaderID, uniformName);
 }
 
-void Shader::SetUniformTexture(const char* textureName, Texture texture) {
-	int loc = this->GetUniform(textureName);
-	glUniform1i(loc, int(texture.slot));
-}
-
 Shader::Shader(const std::string VertexShaderPath, const std::string FragmentShaderPath) {
 	this->m_ShaderID = glCreateProgram();
 

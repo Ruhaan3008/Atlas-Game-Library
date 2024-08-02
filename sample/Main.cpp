@@ -7,7 +7,7 @@ using namespace Atlas::CORE;
 using namespace Atlas::CORE::Errors;
 #endif
 using namespace Atlas::Graphics;
-using namespace Atlas::glm;
+using namespace glm;
 
 int WinMain() {
 
@@ -62,13 +62,7 @@ int WinMain() {
 
     Renderer square(mesh, program);
 
-
-    int loc = program.GetUniform("Transform");
-    int projLoc = program.GetUniform("Projection");
-
-    int texLoc = program.GetUniform("Tex");
-    glUniform1i(texLoc, 3);
-
+    program.SetUniform("ourTexture", 3);
 
     //Main Game Loop
 
@@ -79,14 +73,14 @@ int WinMain() {
         application.ClearDepthBuffer();
 
         application.UpdateWindowSize();
+
         Projection = perspective(radians(45.0f), Window::Main->AspectRatio, 0.1f, 100.0f);
+        program.SetUniform("Projection", Projection);
 
-        glUniformMatrix4fv(projLoc, 1, GL_FALSE, value_ptr(Projection));
+        TransformMatrix = rotate(TransformMatrix, radians(1.0f), vec3(0.0f, 1.0f, 0.0f));
 
-        TransformMatrix = rotate(TransformMatrix, radians(01.0f), vec3(0.0f, 1.0f, 0.0f));
-        TransformMatrix = rotate(TransformMatrix, radians(00.0f), vec3(0.0f, 0.0f, 1.0f));
+        program.SetUniform("Transform", TransformMatrix);
 
-        glUniformMatrix4fv(loc, 1, GL_FALSE, value_ptr(TransformMatrix));
         square.Draw();
 
         application.SwapBuffer();

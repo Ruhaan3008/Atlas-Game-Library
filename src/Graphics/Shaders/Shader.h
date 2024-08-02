@@ -1,7 +1,12 @@
 #pragma once
 #include <iostream>
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 
 #include "../Textures/Texture.h"
+#include "../../Math.h"
+
+using namespace glm;
 
 namespace Atlas {
 	namespace Graphics {
@@ -26,7 +31,6 @@ namespace Atlas {
 
 
 			int GetUniform(const char* uniformName);
-			void SetUniformTexture(const char* textureName, Texture texture);
 
 			unsigned int GetShaderID() const { return m_ShaderID; };
 
@@ -37,6 +41,11 @@ namespace Atlas {
 			Shader(const std::string VertexShaderPath, const std::string FragmentShaderPath);
 
 			~Shader();
+
+		public:
+			void SetUniform(std::string uniformName, int data);
+			void SetUniform(std::string uniformName, Texture texture);
+			void SetUniform(std::string uniformName, mat4x4 Matrix);
 		};
 	}
 }
