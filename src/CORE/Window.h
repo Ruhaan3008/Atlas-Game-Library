@@ -15,9 +15,12 @@ namespace Atlas {
 			static void FrameBufferSizeCallBack(GLFWwindow* window, int t_Width, int t_Height);
 
 		public:
+			static Window* Main;
 
 			int height;
 			int width;
+
+			float AspectRatio;
 
 			//Clears the window
 			void ClearFrame();

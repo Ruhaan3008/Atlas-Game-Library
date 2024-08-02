@@ -12,8 +12,8 @@ namespace Atlas {
 			unsigned int m_VertexShaderID;
 			unsigned int m_FragmentShaderID;
 
-			std::string vertexShaderSource;
-			std::string fragmentShaderSource;
+			std::string m_VertexShaderSource;
+			std::string m_FragmentShaderSource;
 
 			std::string ReadShaderFile(std::string path);
 

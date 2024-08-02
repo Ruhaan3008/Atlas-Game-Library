@@ -9,8 +9,6 @@ using namespace Atlas::CORE::Errors;
 using namespace Atlas::Graphics;
 using namespace Atlas::glm;
 
-
-
 int WinMain() {
 
     #ifdef ENABLE_ERROR_LOG
@@ -24,6 +22,8 @@ int WinMain() {
     application.EnableDepthTest();
 
     //application.SetFullScreen();
+
+    Window::Main = &application;
 
     //Mesh Setup
     float points[] = {
@@ -50,9 +50,6 @@ int WinMain() {
 
     //Camera Setup
     mat4x4 Projection(1.0f);
-
-    Projection = perspective(radians(45.0f), 500.0f / 500.0f, 0.1f, 100.0f);
-
  
     Shader program = Shader("res/Shaders/BasicVertexShader.glsl", "res/Shaders/BasicFragmentShader.glsl");
 
@@ -72,16 +69,19 @@ int WinMain() {
     int texLoc = program.GetUniform("Tex");
     glUniform1i(texLoc, 3);
 
-    glUniformMatrix4fv(projLoc, 1, GL_FALSE, value_ptr(Projection));
-
 
     //Main Game Loop
 
     /* Loop until the user closes the window */
     while (!(application.ShouldClose()))
-    {
+    { 
         application.ClearFrame();
         application.ClearDepthBuffer();
+
+        application.UpdateWindowSize();
+        Projection = perspective(radians(45.0f), Window::Main->AspectRatio, 0.1f, 100.0f);
+
+        glUniformMatrix4fv(projLoc, 1, GL_FALSE, value_ptr(Projection));
 
         TransformMatrix = rotate(TransformMatrix, radians(01.0f), vec3(0.0f, 1.0f, 0.0f));
         TransformMatrix = rotate(TransformMatrix, radians(00.0f), vec3(0.0f, 0.0f, 1.0f));

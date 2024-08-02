@@ -14,6 +14,8 @@ using namespace Atlas::CORE::Errors;
 
 using namespace Atlas::CORE;
 
+Atlas::CORE::Window* Atlas::CORE::Window::Main;
+
 void Window::SetFullScreen() {
 
     GLFWmonitor* monitor = glfwGetPrimaryMonitor();
@@ -58,6 +60,7 @@ void Window::SwapBuffer() {
 
 void Window::UpdateWindowSize() {
     glfwGetWindowSize(m_Window, &(this->height), &(this->width));
+    this->AspectRatio = (float)height / (float)width;
 }
 
 void Window::FrameBufferSizeCallBack(GLFWwindow* window, int t_Width, int t_Height) {
@@ -71,8 +74,10 @@ void Window::DestroyWindow() {
 void Window::Initiate(int t_Height, int t_Width, const char* windowName) {
     glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
 
-    this->height = height;
-    this->width = width;
+    this->height = t_Height;
+    this->width = t_Width;
+
+    this->AspectRatio = (float)t_Height / (float)t_Width;
 
     /* Create a windowed mode window and its OpenGL context */
     m_Window = glfwCreateWindow(t_Width, t_Height, windowName, NULL, NULL);

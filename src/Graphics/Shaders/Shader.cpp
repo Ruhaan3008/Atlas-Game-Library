@@ -94,11 +94,11 @@ Shader::Shader(const std::string VertexShaderPath, const std::string FragmentSha
 	this->vertexShaderPath = VertexShaderPath;
 	this->fragmentShaderPath = FragmentShaderPath;
 
-	this->vertexShaderSource = ReadShaderFile(this->vertexShaderPath);
-	this->fragmentShaderSource = ReadShaderFile(this->fragmentShaderPath);
+	this->m_VertexShaderSource = ReadShaderFile(this->vertexShaderPath);
+	this->m_FragmentShaderSource = ReadShaderFile(this->fragmentShaderPath);
 
-	this->m_VertexShaderID = CompileComponentShader(GL_VERTEX_SHADER, this->vertexShaderSource);
-	this->m_FragmentShaderID = CompileComponentShader(GL_FRAGMENT_SHADER, this->fragmentShaderSource);
+	this->m_VertexShaderID = CompileComponentShader(GL_VERTEX_SHADER, this->m_VertexShaderSource);
+	this->m_FragmentShaderID = CompileComponentShader(GL_FRAGMENT_SHADER, this->m_FragmentShaderSource);
 
 	CombineComponentShaders();
 
@@ -112,11 +112,11 @@ Shader::Shader() {
 	this->vertexShaderPath = "";
 	this->fragmentShaderPath = "";
 
-	this->vertexShaderSource = VertexShaderSource;
-	this->fragmentShaderSource = FragmentShaderSource;
+	this->m_VertexShaderSource = VertexShaderSource;
+	this->m_FragmentShaderSource = FragmentShaderSource;
 
-	this->m_VertexShaderID = CompileComponentShader(GL_VERTEX_SHADER, this->vertexShaderSource);
-	this->m_FragmentShaderID = CompileComponentShader(GL_FRAGMENT_SHADER, this->fragmentShaderSource);
+	this->m_VertexShaderID = CompileComponentShader(GL_VERTEX_SHADER, this->m_VertexShaderSource);
+	this->m_FragmentShaderID = CompileComponentShader(GL_FRAGMENT_SHADER, this->m_FragmentShaderSource);
 
 	CombineComponentShaders();
 
