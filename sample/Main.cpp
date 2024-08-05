@@ -7,6 +7,7 @@ using namespace Atlas::CORE;
 using namespace Atlas::CORE::Errors;
 #endif
 using namespace Atlas::Graphics;
+using namespace Atlas::Scene;
 using namespace glm;
 
 int WinMain() {
@@ -42,12 +43,6 @@ int WinMain() {
 
     Mesh mesh = Mesh(points, 4, indices, 6);
 
-    mat4x4 TransformMatrix(1.0f);
-
-    TransformMatrix = translate(TransformMatrix, vec3(0.0f, 0.0f, -10.2f));
-    TransformMatrix = scale(TransformMatrix, vec3(1.0f, 1.0f, 1.0f));
-
-
     //Camera Setup
     mat4x4 Projection(1.0f);
  
@@ -61,6 +56,12 @@ int WinMain() {
     //Load Scene
 
     Renderer square(mesh, program);
+
+    Transform squareTransform(vec3(0.0f, 0.0f, -10.2f));
+    squareTransform.Scale = vec3(1.0f, 1.0f, 1.0f);
+    squareTransform.Rotation = vec3(1.0f, 0.0f, 0.0f);
+    squareTransform.UpdateMatrix();
+
 
     program.SetUniform("ourTexture", 3);
 
@@ -77,9 +78,12 @@ int WinMain() {
         Projection = perspective(radians(45.0f), Window::Main->AspectRatio, 0.1f, 100.0f);
         program.SetUniform("Projection", Projection);
 
-        TransformMatrix = rotate(TransformMatrix, radians(1.0f), vec3(0.0f, 1.0f, 0.0f));
+        squareTransform.Rotation.x += 1.0f;
+        squareTransform.Rotation.y += 1.0f;
+        squareTransform.Rotation.z += 1.0f;
+        squareTransform.UpdateMatrix();
 
-        program.SetUniform("Transform", TransformMatrix);
+        program.SetUniform("Transform", squareTransform.Matrix);
 
         square.Draw();
 
@@ -88,9 +92,6 @@ int WinMain() {
     }
 
     //Terminate
-
-    //Errors::CheckError();
-
     application.DestroyWindow();
 
     square.~Renderer();

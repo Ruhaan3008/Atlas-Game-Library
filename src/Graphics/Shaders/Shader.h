@@ -29,13 +29,10 @@ namespace Atlas {
 			std::string vertexShaderPath;
 			std::string fragmentShaderPath;
 
-
-			int GetUniform(const char* uniformName);
-
 			unsigned int GetShaderID() const { return m_ShaderID; };
 
 			//Uses shader for rendering.
-			void Use() { glUseProgram(m_ShaderID); };
+			void Use() const { glUseProgram(m_ShaderID); };
 
 			Shader();
 			Shader(const std::string VertexShaderPath, const std::string FragmentShaderPath);
@@ -43,9 +40,11 @@ namespace Atlas {
 			~Shader();
 
 		public:
-			void SetUniform(std::string uniformName, int data);
-			void SetUniform(std::string uniformName, Texture texture);
-			void SetUniform(std::string uniformName, mat4x4 Matrix);
+			int GetUniform(const char* uniformName) const;
+
+			void SetUniform(std::string uniformName, int data) const;
+			void SetUniform(std::string uniformName, Texture texture) const;
+			void SetUniform(std::string uniformName, mat4x4 Matrix) const;
 		};
 	}
 }

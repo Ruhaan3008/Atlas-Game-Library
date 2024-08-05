@@ -11,3 +11,4 @@
 #include "CORE/CORE.h"
 #include "Graphics/Graphics.h"
 #include "Math.h"
+#include "Scene/Scene.h"

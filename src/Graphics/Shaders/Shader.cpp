@@ -79,7 +79,7 @@ void Shader::CombineComponentShaders() {
 
 }
 
-int Shader::GetUniform(const char* uniformName) {
+int Shader::GetUniform(const char* uniformName) const{
 	return glGetUniformLocation(this->m_ShaderID, uniformName);
 }
 
