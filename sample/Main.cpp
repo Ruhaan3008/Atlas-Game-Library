@@ -44,6 +44,7 @@ int WinMain() {
     Mesh mesh = Mesh(points, 4, indices, 6);
 
     //Camera Setup
+    Camera cam;
     mat4x4 Projection(1.0f);
  
     Shader program = Shader("res/Shaders/BasicVertexShader.glsl", "res/Shaders/BasicFragmentShader.glsl");
@@ -57,7 +58,7 @@ int WinMain() {
 
     Renderer square(mesh, program);
 
-    Transform squareTransform(vec3(0.0f, 0.0f, -10.2f));
+    Transform squareTransform(vec3(0.0f, 0.0f, -10.0f));
     squareTransform.Scale = vec3(1.0f, 1.0f, 1.0f);
     squareTransform.Rotation = vec3(1.0f, 0.0f, 0.0f);
     squareTransform.UpdateMatrix();
@@ -76,7 +77,8 @@ int WinMain() {
         application.UpdateWindowSize();
 
         Projection = perspective(radians(45.0f), Window::Main->AspectRatio, 0.1f, 100.0f);
-        program.SetUniform("Projection", Projection);
+        cam.UpdateMatrix();
+        program.SetUniform("Projection", cam.CameraMatrix);
 
         squareTransform.Rotation.x += 1.0f;
         squareTransform.Rotation.y += 1.0f;

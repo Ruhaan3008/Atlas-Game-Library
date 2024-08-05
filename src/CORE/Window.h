@@ -1,5 +1,9 @@
 #pragma once
 
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+
+
 namespace Atlas {
 	namespace CORE {
 		class Window {

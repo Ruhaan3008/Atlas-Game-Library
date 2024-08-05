@@ -20,17 +20,23 @@ void Atlas::Scene::Transform::UpdateInverseMatrix() {
     InverseMatrix = inverse(InverseMatrix);
 }
 
+Atlas::Scene::Transform::Transform() :
+    Matrix(mat4x4(1.0f)), InverseMatrix(mat4x4(1.0f)),
+    Position(vec3(0.0f, 0.0f, 0.0f)), Rotation(vec3(0.0f, 0.0f, 0.0f)),
+    Scale(vec3(1.0f, 1.0f, 1.0f))
+{}
+
 Atlas::Scene::Transform::Transform(vec3 t_Position) :
-    Matrix(mat4x4(1.0f)),
+    Matrix(mat4x4(1.0f)), InverseMatrix(mat4x4(1.0f)),
     Position(t_Position), Rotation(vec3(0.0f, 0.0f, 0.0f)), Scale(vec3(1.0f, 1.0f, 1.0f))
 {}
 
 Atlas::Scene::Transform::Transform(vec3 t_Position, vec3 t_Rotation) :
-    Matrix(mat4x4(1.0f)),
+    Matrix(mat4x4(1.0f)), InverseMatrix(mat4x4(1.0f)),
     Position(t_Position), Rotation(t_Rotation), Scale(vec3(1.0f, 1.0f, 1.0f))
 {}
 
 Atlas::Scene::Transform::Transform(vec3 t_Position, vec3 t_Rotation, vec3 t_Scale) :
-    Matrix(mat4x4(1.0f)),
+    Matrix(mat4x4(1.0f)), InverseMatrix(mat4x4(1.0f)),
     Position(t_Position), Rotation(t_Rotation), Scale(t_Scale)
 {}

@@ -5,7 +5,9 @@ using namespace glm;
 
 namespace Atlas {
 	namespace Scene {
-		struct Transform {
+
+		class Transform {
+		public:
 			mat4x4 Matrix;
 			mat4x4 InverseMatrix;
 
@@ -20,6 +22,7 @@ namespace Atlas {
 			void UpdateMatrix();
 			void UpdateInverseMatrix();
 
+			Transform();
 			Transform(vec3 t_Position);
 			Transform(vec3 t_Position, vec3 t_Rotation);
 			Transform(vec3 t_Position, vec3 t_Rotation, vec3 t_Scale);

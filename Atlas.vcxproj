@@ -33,6 +33,7 @@
     <ClCompile Include="src\Graphics\Structs\Mesh.cpp" />
     <ClCompile Include="src\Graphics\Textures\STBI\STBI.cpp" />
     <ClCompile Include="src\Graphics\Textures\Texture.cpp" />
+    <ClCompile Include="src\Scene\Camera.cpp" />
     <ClCompile Include="src\Scene\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +59,7 @@
     <ClInclude Include="src\Graphics\Textures\STBI\stb_image.h" />
     <ClInclude Include="src\Graphics\Textures\Texture.h" />
     <ClInclude Include="src\Math.h" />
+    <ClInclude Include="src\Scene\Camera.h" />
     <ClInclude Include="src\Scene\Scene.h" />
     <ClInclude Include="src\Scene\Transform.h" />
   </ItemGroup>
