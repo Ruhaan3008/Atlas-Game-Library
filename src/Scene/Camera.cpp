@@ -7,6 +7,7 @@ using namespace Atlas::CORE;
 Atlas::Scene::Camera Atlas::Scene::Camera::Main;
 
 void Atlas::Scene::Camera::UpdateMatrix() {
+	transform.Scale = vec3(1.0f, 1.0f, 1.0f);
 	transform.UpdateInverseMatrix();
 
 	if (Mode == CameraMode::Perspective) {
