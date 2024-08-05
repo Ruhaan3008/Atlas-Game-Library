@@ -7,9 +7,8 @@ using namespace Atlas::CORE;
 using namespace Atlas::CORE::Errors;
 #endif
 using namespace Atlas::Graphics;
-using namespace Atlas::glm;
-
-
+using namespace Atlas::Scene;
+using namespace glm;
 
 int WinMain() {
 
@@ -24,6 +23,8 @@ int WinMain() {
     application.EnableDepthTest();
 
     //application.SetFullScreen();
+
+    Window::Main = &application;
 
     //Mesh Setup
     float points[] = {
@@ -42,17 +43,9 @@ int WinMain() {
 
     Mesh mesh = Mesh(points, 4, indices, 6);
 
-    mat4x4 TransformMatrix(1.0f);
-
-    TransformMatrix = translate(TransformMatrix, vec3(0.0f, 0.0f, -10.2f));
-    TransformMatrix = scale(TransformMatrix, vec3(1.0f, 1.0f, 1.0f));
-
-
     //Camera Setup
+    Camera cam;
     mat4x4 Projection(1.0f);
-
-    Projection = perspective(radians(45.0f), 500.0f / 500.0f, 0.1f, 100.0f);
-
  
     Shader program = Shader("res/Shaders/BasicVertexShader.glsl", "res/Shaders/BasicFragmentShader.glsl");
 
@@ -65,28 +58,35 @@ int WinMain() {
 
     Renderer square(mesh, program);
 
+    Transform squareTransform(vec3(0.0f, 0.0f, -10.0f));
+    squareTransform.Scale = vec3(1.0f, 1.0f, 1.0f);
+    squareTransform.Rotation = vec3(1.0f, 0.0f, 0.0f);
+    squareTransform.UpdateMatrix();
 
-    int loc = program.GetUniform("Transform");
-    int projLoc = program.GetUniform("Projection");
 
-    int texLoc = program.GetUniform("Tex");
-    glUniform1i(texLoc, 3);
-
-    glUniformMatrix4fv(projLoc, 1, GL_FALSE, value_ptr(Projection));
-
+    program.SetUniform("ourTexture", 3);
 
     //Main Game Loop
 
     /* Loop until the user closes the window */
     while (!(application.ShouldClose()))
-    {
+    { 
         application.ClearFrame();
         application.ClearDepthBuffer();
 
-        TransformMatrix = rotate(TransformMatrix, radians(01.0f), vec3(0.0f, 1.0f, 0.0f));
-        TransformMatrix = rotate(TransformMatrix, radians(00.0f), vec3(0.0f, 0.0f, 1.0f));
+        application.UpdateWindowSize();
 
-        glUniformMatrix4fv(loc, 1, GL_FALSE, value_ptr(TransformMatrix));
+        Projection = perspective(radians(45.0f), Window::Main->AspectRatio, 0.1f, 100.0f);
+        cam.UpdateMatrix();
+        program.SetUniform("Projection", cam.CameraMatrix);
+
+        squareTransform.Rotation.x += 1.0f;
+        squareTransform.Rotation.y += 1.0f;
+        squareTransform.Rotation.z += 1.0f;
+        squareTransform.UpdateMatrix();
+
+        program.SetUniform("Transform", squareTransform.Matrix);
+
         square.Draw();
 
         application.SwapBuffer();
@@ -94,9 +94,6 @@ int WinMain() {
     }
 
     //Terminate
-
-    //Errors::CheckError();
-
     application.DestroyWindow();
 
     square.~Renderer();
