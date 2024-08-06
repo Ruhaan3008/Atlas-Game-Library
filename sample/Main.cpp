@@ -45,7 +45,6 @@ int WinMain() {
 
     //Camera Setup
     Camera cam;
-    mat4x4 Projection(1.0f);
  
     Shader program = Shader("res/Shaders/BasicVertexShader.glsl", "res/Shaders/BasicFragmentShader.glsl");
 
@@ -76,13 +75,10 @@ int WinMain() {
 
         application.UpdateWindowSize();
 
-        Projection = perspective(radians(45.0f), Window::Main->AspectRatio, 0.1f, 100.0f);
         cam.UpdateMatrix();
         program.SetUniform("Projection", cam.CameraMatrix);
 
-        squareTransform.Rotation.x += 1.0f;
         squareTransform.Rotation.y += 1.0f;
-        squareTransform.Rotation.z += 1.0f;
         squareTransform.UpdateMatrix();
 
         program.SetUniform("Transform", squareTransform.Matrix);
